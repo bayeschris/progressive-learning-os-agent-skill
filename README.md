@@ -6,6 +6,39 @@ This framework is designed to work across domains (e.g., rare disease, agentic f
 
 ---
 
+## How to invoke this skill
+
+In chat, explicitly ask to use the skill and include domain + track + objective.
+
+### Quick invocation template
+
+"Use `progressive-learning-os`.
+Domain: <domain>.
+Track: <track>.
+Objective: <one sentence>.
+Decision horizon: <time window>.
+Today mode: <setup|execute|migrate|publish>."
+
+### Example invocations
+
+1) Rare disease (CMT1B)
+
+"Use `progressive-learning-os` for domain `rare-disease`, track `cmt1b`. Migrate my existing work, rebuild objective/risk/decision artifacts, and resume from current blocker."
+
+2) Agentic frameworks
+
+"Use `progressive-learning-os` for domain `agentic-frameworks`, track `memory-agent-v2`. Run tri-track execution and produce today’s Objective/Status/Focus/Learning outputs."
+
+3) Vertical farming
+
+"Use `progressive-learning-os` for domain `vertical-farming`, track `lettuce-rack-v1`. Build a risk-first plan, day 0–7 execution board, and daily publish bundle."
+
+4) Legacy pile migration
+
+"Use `progressive-learning-os` to convert my existing notes/docs into this framework and create a `where-we-left-off` resume note with first 3 tasks."
+
+---
+
 ## What this is
 
 This repo centers on a reusable skill:
