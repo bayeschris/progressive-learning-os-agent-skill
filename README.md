@@ -12,7 +12,7 @@ In chat, explicitly ask to use the skill and include domain + track + objective.
 
 ### Quick invocation template
 
-"Use `progressive-learning-os`.
+"Use `progressive-learning-os-agent-skill`.
 Domain: <domain>.
 Track: <track>.
 Objective: <one sentence>.
@@ -23,19 +23,19 @@ Today mode: <setup|execute|migrate|publish>."
 
 1) Rare disease (CMT1B)
 
-"Use `progressive-learning-os` for domain `rare-disease`, track `cmt1b`. Migrate my existing work, rebuild objective/risk/decision artifacts, and resume from current blocker."
+"Use `progressive-learning-os-agent-skill` for domain `rare-disease`, track `cmt1b`. Migrate my existing work, rebuild objective/risk/decision artifacts, and resume from current blocker."
 
 2) Agentic frameworks
 
-"Use `progressive-learning-os` for domain `agentic-frameworks`, track `memory-agent-v2`. Run tri-track execution and produce today’s Objective/Status/Focus/Learning outputs."
+"Use `progressive-learning-os-agent-skill` for domain `agentic-frameworks`, track `memory-agent-v2`. Run tri-track execution and produce today’s Objective/Status/Focus/Learning outputs."
 
 3) Vertical farming
 
-"Use `progressive-learning-os` for domain `vertical-farming`, track `lettuce-rack-v1`. Build a risk-first plan, day 0–7 execution board, and daily publish bundle."
+"Use `progressive-learning-os-agent-skill` for domain `vertical-farming`, track `lettuce-rack-v1`. Build a risk-first plan, day 0–7 execution board, and daily publish bundle."
 
 4) Legacy pile migration
 
-"Use `progressive-learning-os` to convert my existing notes/docs into this framework and create a `where-we-left-off` resume note with first 3 tasks."
+"Use `progressive-learning-os-agent-skill` to convert my existing notes/docs into this framework and create a `where-we-left-off` resume note with first 3 tasks."
 
 ---
 
@@ -43,7 +43,7 @@ Today mode: <setup|execute|migrate|publish>."
 
 This repo centers on a reusable skill:
 
-- `skills/progressive-learning-os/`
+- `~/.claude/skills/progressive-learning-os-agent-skill/`
 
 The skill runs a **tri-track loop** in parallel:
 
@@ -67,7 +67,7 @@ When turning this into a public starter repo, use this structure:
 ```text
 project-os/
   core/
-    skills/progressive-learning-os/
+    skills/progressive-learning-os-agent-skill/
     templates/
     rubrics/
   domains/
@@ -102,9 +102,9 @@ Track config wins on conflict.
 
 ## Current location of the skill in this workspace
 
-- Main skill: `skills/progressive-learning-os/SKILL.md`
-- References: `skills/progressive-learning-os/references/`
-- Template assets: `skills/progressive-learning-os/assets/templates/`
+- Main skill: `skills/progressive-learning-os-agent-skill/SKILL.md`
+- References: `skills/progressive-learning-os-agent-skill/references/`
+- Template assets: `skills/progressive-learning-os-agent-skill/assets/templates/`
 - Obsidian starter index: `obsidian/Progressive-Learning-OS/00-Index/current-cycle.md`
 
 ---
@@ -322,7 +322,7 @@ Prefer a **70% structured migration in one pass** over a week of reorganizing. T
 
 Commit:
 
-- reusable skill framework (`skills/progressive-learning-os/**`)
+- reusable skill framework (`skills/progressive-learning-os-agent-skill/**`)
 - templates/rubrics/scripts/docs
 - domain configs and sanitized example tracks
 
