@@ -79,6 +79,15 @@ Track KPI trendlines, ship research-method upgrades daily, and promote methods f
 Use `references/15-obsidian-organization.md`.
 Mirror each cycle’s outputs into `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/` with dated filenames and updated index links.
 
+## 14) Render complex artifacts visually (optional)
+Use `references/17-visual-explainer-integration.md`.
+When an artifact exceeds complexity thresholds (3+ unknowns on a learn card, decision packet promotion, 5+ tasks on an execution board), render it as a styled HTML page using the Visual Explainer skill.
+Available visual prompts:
+- `prompts/visual-learn-card.md` -- learn cards with confidence meters and evidence links
+- `prompts/visual-decision-packet.md` -- decision packets with version timelines and evidence maps
+- `prompts/visual-execution-board.md` -- day 0-7 boards as operational dashboards
+Output goes to `~/.agent/diagrams/` and opens in the browser. The markdown version in Obsidian is preserved as the source of truth.
+
 ## Rules
 - Never keep claims unlinked to evidence in evidence-required domains.
 - Never block objective-critical execution waiting for perfect understanding; ship with explicit uncertainty + falsification next step.
