@@ -79,14 +79,14 @@ Track KPI trendlines, ship research-method upgrades daily, and promote methods f
 Use `references/15-obsidian-organization.md`.
 Mirror each cycle’s outputs into `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/` with dated filenames and updated index links.
 
-## 14) Render complex artifacts visually (optional)
-Use `references/17-visual-explainer-integration.md`.
-When an artifact exceeds complexity thresholds (3+ unknowns on a learn card, decision packet promotion, 5+ tasks on an execution board), render it as a styled HTML page using the Visual Explainer skill.
+## 14) Render complex artifacts with Obsidian-enriched markdown
+Use `references/17-visual-explainer-integration.md` and `references/18-obsidian-enriched-patterns.md`.
+When an artifact exceeds complexity thresholds (3+ unknowns on a learn card, decision packet promotion, 5+ tasks on an execution board, 4+ risk buckets), render it using enriched Obsidian patterns (Mermaid diagrams, callout blocks, Dataview-queryable frontmatter, Chart.js trend blocks, inline HTML status indicators).
 Available visual prompts:
-- `prompts/visual-learn-card.md` -- learn cards with confidence meters and evidence links
-- `prompts/visual-decision-packet.md` -- decision packets with version timelines and evidence maps
-- `prompts/visual-execution-board.md` -- day 0-7 boards as operational dashboards
-Output goes to `~/.agent/diagrams/` and opens in the browser. The markdown version in Obsidian is preserved as the source of truth.
+- `prompts/visual-learn-card.md` -- learn cards with confidence gauges, evidence linkage diagrams, and callout-based teach-back sections
+- `prompts/visual-decision-packet.md` -- decision packets with Mermaid version timelines, risk maps, and promotion criteria checklists
+- `prompts/visual-execution-board.md` -- execution boards with KPI callouts, Mermaid timelines, and task status indicators
+Output stays in the Obsidian vault alongside the standard markdown artifacts.
 
 ## Rules
 - Never keep claims unlinked to evidence in evidence-required domains.

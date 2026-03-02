@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Integration tests for Visual Explainer + Progressive Learning OS skill
+# Integration tests for Obsidian-enriched rendering + Progressive Learning OS skill
 # Run from the project root: bash tests/test_integration.sh
 
 set -euo pipefail
@@ -23,7 +23,7 @@ fail() {
   echo "  FAIL: $1"
 }
 
-echo "=== Visual Explainer Integration Tests ==="
+echo "=== Obsidian-Enriched Rendering Integration Tests ==="
 echo ""
 
 # -------------------------------------------------------
@@ -34,6 +34,7 @@ echo "--- Test 1: Required integration files exist ---"
 required_files=(
   "SKILL.md"
   "references/17-visual-explainer-integration.md"
+  "references/18-obsidian-enriched-patterns.md"
   "prompts/visual-learn-card.md"
   "prompts/visual-decision-packet.md"
   "prompts/visual-execution-board.md"
@@ -65,6 +66,12 @@ else
   fail "SKILL.md does not reference integration guide"
 fi
 
+if grep -q "18-obsidian-enriched-patterns" "$PROJECT_ROOT/SKILL.md"; then
+  pass "SKILL.md references pattern library"
+else
+  fail "SKILL.md does not reference pattern library"
+fi
+
 # -------------------------------------------------------
 # Test 3: Integration reference document structure
 # -------------------------------------------------------
@@ -74,7 +81,7 @@ echo "--- Test 3: Integration reference document structure ---"
 INTEGRATION_REF="$PROJECT_ROOT/references/17-visual-explainer-integration.md"
 if [ -f "$INTEGRATION_REF" ]; then
   # Check for required sections
-  for section in "Security" "Integration" "Output" "visual-explainer"; do
+  for section in "Security" "Integration" "Output" "Obsidian"; do
     if grep -qi "$section" "$INTEGRATION_REF"; then
       pass "Integration doc contains '$section' section"
     else
@@ -146,15 +153,21 @@ for pattern in "${unsafe_patterns[@]}"; do
 done
 
 # -------------------------------------------------------
-# Test 6: Output directory reference is correct
+# Test 6: Obsidian-native output references
 # -------------------------------------------------------
 echo ""
-echo "--- Test 6: Output directory references ---"
+echo "--- Test 6: Obsidian-native output references ---"
 
-if grep -rq '~/.agent/diagrams/' "$PROJECT_ROOT/references/17-visual-explainer-integration.md" 2>/dev/null; then
-  pass "Integration doc references correct output directory"
+if grep -rq 'Obsidian vault' "$PROJECT_ROOT/references/17-visual-explainer-integration.md" 2>/dev/null; then
+  pass "Integration doc references Obsidian vault output"
 else
-  fail "Integration doc does not reference ~/.agent/diagrams/ output directory"
+  fail "Integration doc does not reference Obsidian vault output"
+fi
+
+if grep -rq 'Progressive-Learning-OS' "$PROJECT_ROOT/references/17-visual-explainer-integration.md" 2>/dev/null; then
+  pass "Integration doc references vault folder structure"
+else
+  fail "Integration doc does not reference vault folder structure"
 fi
 
 # -------------------------------------------------------
@@ -184,18 +197,18 @@ for pattern in "${secret_patterns[@]}"; do
 done
 
 # -------------------------------------------------------
-# Test 8: Prompt templates reference visual-explainer skill
+# Test 8: Prompt templates reference Obsidian-enriched workflow
 # -------------------------------------------------------
 echo ""
-echo "--- Test 8: Prompt templates reference visual-explainer workflow ---"
+echo "--- Test 8: Prompt templates reference Obsidian-enriched workflow ---"
 
 for f in "${prompt_files[@]}"; do
   filepath="$PROJECT_ROOT/$f"
   if [ -f "$filepath" ]; then
-    if grep -qi "visual-explainer\|html\|diagram\|browser" "$filepath"; then
-      pass "$f references visual output workflow"
+    if grep -qi "obsidian-enriched\|mermaid\|callout\|diagram\|frontmatter" "$filepath"; then
+      pass "$f references Obsidian-enriched workflow"
     else
-      fail "$f does not reference visual output workflow"
+      fail "$f does not reference Obsidian-enriched workflow"
     fi
   fi
 done
@@ -214,6 +227,52 @@ for f in "${prompt_files[@]}"; do
     else
       pass "$f has no path traversal patterns"
     fi
+  fi
+done
+
+# -------------------------------------------------------
+# Test 10: Pattern library completeness
+# -------------------------------------------------------
+echo ""
+echo "--- Test 10: Pattern library completeness ---"
+
+PATTERNS_REF="$PROJECT_ROOT/references/18-obsidian-enriched-patterns.md"
+if [ -f "$PATTERNS_REF" ]; then
+  for section in "Frontmatter" "Mermaid" "Callout" "Inline HTML" "Dataview" "Chart"; do
+    if grep -qi "$section" "$PATTERNS_REF"; then
+      pass "Pattern library contains '$section' section"
+    else
+      fail "Pattern library missing '$section' section"
+    fi
+  done
+else
+  fail "Pattern library file does not exist (skipping completeness tests)"
+fi
+
+# -------------------------------------------------------
+# Test 11: Reference templates have frontmatter schemas
+# -------------------------------------------------------
+echo ""
+echo "--- Test 11: Reference templates have frontmatter schemas ---"
+
+ref_templates=(
+  "references/02-risk-breakdown.md"
+  "references/03-learn-card.md"
+  "references/04-version-promotion-rubric.md"
+  "references/05-day0-7-execution.md"
+  "references/06-weekly-learning-review.md"
+)
+
+for f in "${ref_templates[@]}"; do
+  filepath="$PROJECT_ROOT/$f"
+  if [ -f "$filepath" ]; then
+    if grep -q "^type:" "$filepath"; then
+      pass "$f has type field in frontmatter schema"
+    else
+      fail "$f missing type field in frontmatter schema"
+    fi
+  else
+    fail "$f does not exist"
   fi
 done
 

@@ -4,15 +4,15 @@ Store all run outputs under:
 `obsidian/Progressive-Learning-OS/`
 
 ## Folder map
-- `00-Index/` — navigation notes and current cycle links
-- `01-Objective/` — objective + gates snapshots
-- `02-Risks/` — ranked risk maps
-- `03-Learn-Cards/` — topic learn cards
-- `04-Research/` — evidence maps, decision packets, drill-ins
-- `05-Execution/` — day 0–7 boards, checkpoints
-- `06-Publishing/` — LinkedIn/X/TikTok drafts + arXiv pathway notes
-- `07-Skill-Evolution/` — skill upgrade logs + rubric scores
-- `08-Research-Improvement/` — daily KPI logs and post-mortems
+- `00-Index/` -- navigation notes and current cycle links
+- `01-Objective/` -- objective + gates snapshots
+- `02-Risks/` -- ranked risk maps
+- `03-Learn-Cards/` -- topic learn cards
+- `04-Research/` -- evidence maps, decision packets, drill-ins
+- `05-Execution/` -- day 0-7 boards, checkpoints
+- `06-Publishing/` -- LinkedIn/X/TikTok drafts + arXiv pathway notes
+- `07-Skill-Evolution/` -- skill upgrade logs + rubric scores
+- `08-Research-Improvement/` -- daily KPI logs and post-mortems
 
 ## Naming rules
 - Use date prefix: `YYYY-MM-DD-<slug>.md`
@@ -20,7 +20,7 @@ Store all run outputs under:
 - Keep one canonical latest link in `00-Index/current-cycle.md`
 
 ## Daily filing checklist
-1. Save today’s Objective/Status/Focus note.
+1. Save today's Objective/Status/Focus note.
 2. File any new learn cards under `03-Learn-Cards/`.
 3. File decision/research deltas under `04-Research/`.
 4. File publish drafts under `06-Publishing/`.
@@ -28,6 +28,106 @@ Store all run outputs under:
 
 ## Cross-link rule
 Every note should include:
-- `Objective:` link
-- `Current decision packet:` link
-- `Today’s execution board:` link
+- `[[YYYY-MM-DD-objective-and-gates]]` link (use wikilinks for all internal references)
+- `[[YYYY-MM-DD-decision-packet-v0.x]]` link
+- `[[YYYY-MM-DD-execution-board]]` link
+
+Use `[[wikilinks]]` consistently so Obsidian's graph view and backlink panels work.
+
+## Frontmatter convention
+
+Every note gets at minimum:
+
+```yaml
+---
+type: <artifact-type>
+date: YYYY-MM-DD
+---
+```
+
+Full frontmatter schemas for each artifact type are defined in `references/18-obsidian-enriched-patterns.md` section A.
+
+| Artifact | Required `type` value |
+|----------|-----------------------|
+| Objective | `objective` |
+| Risk Breakdown | `risk-breakdown` |
+| Learn Card | `learn-card` |
+| Decision Packet | `decision-packet` |
+| Execution Board | `execution-board` |
+| Research Improvement Log | `research-improvement-log` |
+| Weekly Review | `weekly-review` |
+| Publishing Draft | `publishing-draft` |
+
+## Recommended Obsidian plugins
+
+| Plugin | Why |
+|--------|-----|
+| **Dataview** | Query frontmatter across all notes; build live dashboards in index notes |
+| **Charts** | Render Chart.js blocks for KPI trends in research improvement logs |
+| **Kanban** | Convert execution board task lists into visual kanban boards |
+| **Templater** | Insert templates with dynamic date substitution |
+
+See `references/17-visual-explainer-integration.md` for install instructions.
+
+## Enriched markdown conventions
+
+All enriched rendering patterns (Mermaid diagrams, callout blocks, inline HTML, Dataview queries, Chart.js blocks) are documented in `references/18-obsidian-enriched-patterns.md`.
+
+Key conventions:
+- Use callout blocks (`> [!type]`) for visual hierarchy instead of nested headers
+- Use Mermaid fenced blocks for diagrams (rendered by Obsidian core, no plugin needed)
+- Use `<progress>` and `<span>` for inline status indicators
+- Use Dataview inline fields (`field:: value`) when a value should be queryable but not in frontmatter
+
+## Index note with Dataview queries
+
+`00-Index/current-cycle.md` should include live Dataview queries instead of manually maintained link lists:
+
+````markdown
+## Active Learn Cards
+```dataview
+TABLE confidence, status, risk-bucket
+FROM "Progressive-Learning-OS/03-Learn-Cards"
+WHERE type = "learn-card"
+SORT date DESC
+LIMIT 10
+```
+
+## Decision Packets
+```dataview
+TABLE version, gate, decision-date
+FROM "Progressive-Learning-OS/04-Research"
+WHERE type = "decision-packet"
+SORT decision-date DESC
+LIMIT 5
+```
+
+## Recent Execution Boards
+```dataview
+TABLE total-tasks, completed, blocked, days-remaining
+FROM "Progressive-Learning-OS/05-Execution"
+WHERE type = "execution-board"
+SORT date-range DESC
+LIMIT 3
+```
+````
+
+## Optional: CSS snippet for callout theming
+
+For customized callout colors, create `.obsidian/snippets/plos-callouts.css`:
+
+```css
+/* Stronger visual weight for danger callouts (stop rules) */
+.callout[data-callout="danger"] {
+  --callout-color: 220, 38, 38;
+  border-left-width: 4px;
+}
+
+/* Accent color for success callouts (go gates) */
+.callout[data-callout="success"] {
+  --callout-color: 22, 163, 74;
+  border-left-width: 4px;
+}
+```
+
+Enable in Settings > Appearance > CSS snippets.

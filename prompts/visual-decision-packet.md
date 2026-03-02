@@ -1,9 +1,7 @@
 ---
-description: Render a Progressive Learning OS decision packet as a styled HTML page with version progression, evidence map, and promotion criteria
+description: Render a Progressive Learning OS decision packet as an Obsidian-enriched markdown note with Mermaid timelines, risk diagrams, and promotion criteria
 ---
-Load the visual-explainer skill, then generate a visual HTML page for a decision packet from the Progressive Learning OS.
-
-Follow the visual-explainer skill workflow. Read the reference template at `~/.claude/skills/visual-explainer/templates/architecture.html`, the data table template at `~/.claude/skills/visual-explainer/templates/data-table.html`, and CSS patterns at `~/.claude/skills/visual-explainer/references/css-patterns.md` before generating. Use a blueprint aesthetic with deep slate/blue palette for authority and precision.
+Generate an Obsidian-enriched markdown decision packet using patterns from `references/18-obsidian-enriched-patterns.md` and the rubric in `references/04-version-promotion-rubric.md`.
 
 **Data source:** Read the decision packet content from:
 - `$1` if a file path is provided
@@ -11,38 +9,46 @@ Follow the visual-explainer skill workflow. Read the reference template at `~/.c
 
 **Page structure:**
 
-1. **Header** -- decision packet title, current version (v0.1/v0.2/v0.3), and decision date. Use hero depth with a prominent version badge. Color the badge: amber for v0.1, blue for v0.2, green for v0.3.
+1. **YAML frontmatter** -- populate the decision packet schema:
+   ```yaml
+   ---
+   type: decision-packet
+   version: "<0.1|0.2|0.3>"
+   gate: <go|hold|kill>
+   decision-date: <date>
+   evidence-count: <count>
+   previous-version: "[[<previous packet note>]]"
+   ---
+   ```
 
-2. **Version Timeline** -- horizontal timeline showing version progression:
-   - v0.1: hypothesis and risk map complete
-   - v0.2: key evidence gaps reduced
-   - v0.3: execution-ready with explicit stop rules
-   - Current version highlighted, future versions dimmed
-   - "What changed and why" annotation at each transition
+2. **Header** -- decision packet title as H1, current version as inline badge:
+   - `<span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px">v0.1</span>` (amber)
+   - `<span style="background:#3498db;color:white;padding:2px 8px;border-radius:4px">v0.2</span>` (blue)
+   - `<span style="background:#27ae60;color:white;padding:2px 8px;border-radius:4px">v0.3</span>` (green)
 
-3. **Hypothesis and Risk Map** -- Mermaid diagram showing the core hypothesis and linked risk buckets. Wrap in `.mermaid-wrap` with zoom controls. Nodes color-coded by kill probability: red for high, amber for medium, green for low.
+3. **Version Timeline** -- Mermaid timeline diagram showing version progression with annotations at each transition ("what changed and why"). Current version highlighted, future versions show criteria needed.
 
-4. **Evidence Map** -- table with columns:
+4. **Hypothesis and Risk Map** -- Mermaid flowchart showing core hypothesis linked to risk buckets. Nodes color-coded by kill probability: red=high, amber=medium, green=low. Link to learn cards with `[[wikilinks]]`.
+
+5. **Evidence Map** -- markdown table with columns:
    - Claim
-   - Evidence source (PMID/DOI/URL)
-   - Strength (strong/moderate/weak/missing)
-   - Status indicator with colored dots
+   - Evidence source (PMID/DOI/URL or `[[wikilink]]`)
+   - Strength: <span style="color:green">Strong</span> / <span style="color:#e68a00">Moderate</span> / <span style="color:red">Weak</span> / <span style="color:gray">Missing</span>
 
-5. **Promotion Criteria** -- checklist-style card showing criteria for the next version. Met criteria in green with checkmarks, unmet in amber with empty circles. This makes it immediately clear what work remains.
+6. **Promotion Criteria** -- use `> [!info]` callout with checkbox list showing criteria for the next version. Format met criteria with `- [x]` and unmet with `- [ ]`.
 
-6. **Stop Rules** (v0.3 only) -- styled callout cards with red borders showing explicit conditions under which the decision should be reversed or paused.
+7. **Stop Rules** (v0.3 only) -- use `> [!danger]` callouts, one per stop rule. Each states the explicit condition under which the decision should be reversed or paused.
 
-7. **Go/Hold/Kill Gate** -- prominent decision indicator:
-   - Go: green badge with forward arrow
-   - Hold: amber badge with pause icon
-   - Kill: red badge with stop icon
-   - Decision date and responsible owner
+8. **Go/Hold/Kill Gate** -- prominent gate indicator using the appropriate callout:
+   - Go: `> [!success] Gate: GO` with decision date and responsible owner
+   - Hold: `> [!warning] Gate: HOLD` with conditions to resume
+   - Kill: `> [!danger] Gate: KILL` with rationale
 
 **Visual hierarchy:**
-- Sections 1-2 anchor the page (hero depth, timeline is the visual centerpiece)
-- Sections 3-4 are evidence and reasoning (elevated depth)
-- Sections 5-7 are actionable outputs (elevated for 7, default for 5-6)
+- Sections 1-3 anchor the note (frontmatter + header + timeline diagram)
+- Sections 4-5 are evidence and reasoning (Mermaid diagram + table)
+- Sections 6-8 are actionable outputs (checklists + callouts)
 
-Include responsive section navigation if the packet has extensive evidence maps. Write to `~/.agent/diagrams/` with filename `decision-packet-v0x-<topic-slug>.html`. Open in browser.
+Write to the Obsidian vault path: `<vault>/Progressive-Learning-OS/04-Research/YYYY-MM-DD-decision-packet-v0.x.md`
 
 $@

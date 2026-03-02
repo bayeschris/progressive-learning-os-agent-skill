@@ -1,14 +1,46 @@
 # Daily Research Improvement Log
 
+```yaml
+---
+type: research-improvement-log
+date: YYYY-MM-DD
+time-to-decision: "<value>"
+evidence-strength-ratio: "<value>"
+rework-count: <integer>
+false-lead-rate: "<value>"
+decision-reversals: <integer>
+---
+```
+
 - Date:
 - Objective:
 
+## KPI trend (last 7 entries)
+
+```chart
+type: line
+labels: [Day 1, Day 2, Day 3, Day 4, Day 5, Day 6, Today]
+series:
+  - title: Time-to-Decision
+    data: []
+  - title: Evidence Strength Ratio
+    data: []
+  - title: Rework Count
+    data: []
+  - title: False-Lead Rate
+    data: []
+  - title: Decision Reversals
+    data: []
+width: 80%
+beginAtZero: true
+```
+
 ## KPI snapshot
-- Time-to-decision:
-- Evidence strength ratio:
-- Rework count:
-- False-lead rate:
-- Decision reversal count:
+- Time-to-decision: `time-to-decision::`
+- Evidence strength ratio: `evidence-strength-ratio::`
+- Rework count: `rework-count::`
+- False-lead rate: `false-lead-rate::`
+- Decision reversal count: `decision-reversals::`
 
 ## 10-min post-mortem
 - Slow point:

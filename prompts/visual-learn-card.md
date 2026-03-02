@@ -1,9 +1,7 @@
 ---
-description: Render a Progressive Learning OS learn card as a styled HTML page with evidence links, confidence meter, and teach-back section
+description: Render a Progressive Learning OS learn card as an Obsidian-enriched markdown note with Mermaid diagrams, callout blocks, and confidence gauges
 ---
-Load the visual-explainer skill, then generate a visual HTML page for a learn card from the Progressive Learning OS.
-
-Follow the visual-explainer skill workflow. Read the reference template at `~/.claude/skills/visual-explainer/templates/architecture.html` and CSS patterns at `~/.claude/skills/visual-explainer/references/css-patterns.md` before generating. Use an editorial or paper/ink aesthetic with warm tones.
+Generate an Obsidian-enriched markdown learn card using patterns from `references/18-obsidian-enriched-patterns.md` and the template structure in `references/03-learn-card.md`.
 
 **Data source:** Read the learn card content from:
 - `$1` if a file path is provided
@@ -11,31 +9,51 @@ Follow the visual-explainer skill workflow. Read the reference template at `~/.c
 
 **Page structure:**
 
-1. **Header** -- topic name and linked risk bucket as a monospace label with colored dot indicator. Use hero depth with larger type.
+1. **YAML frontmatter** -- populate the learn card schema:
+   ```yaml
+   ---
+   type: learn-card
+   topic: "<actual topic>"
+   risk-bucket: "<linked risk>"
+   confidence: <0-100>
+   status: open | partial | resolved
+   unknowns-count: <count>
+   date: <today>
+   objective-link: "[[<objective note>]]"
+   decision-packet-link: "[[<packet note>]]"
+   ---
+   ```
 
-2. **Unknowns** -- render each unknown as a styled card with:
+2. **Header** -- topic name as H1, linked risk bucket as inline text. Use `risk-bucket:: <value>` for Dataview queryability.
+
+3. **Unknowns** -- render each unknown as a `> [!question]` callout with:
    - The unknown statement
-   - Status indicator: open (amber), partially resolved (blue), resolved (green)
+   - Status badge: `<span style="color:red">Open</span>` / `<span style="color:#e68a00">Partial</span>` / `<span style="color:green">Resolved</span>`
    - Linked evidence if available
 
-3. **Evidence Plan** -- two-column layout:
-   - Left: source targets with clickable links where available
-   - Right: minimum evidence bar as a visual threshold indicator
+4. **Evidence Plan** -- use a `> [!example]` callout containing:
+   - Source targets with `[[wikilinks]]` or URLs where available
+   - Minimum evidence bar
 
-4. **Teach-back** -- the teach-back bullets rendered as a clean numbered list with generous spacing. This is the core of the card -- give it visual prominence. Use elevated depth.
+5. **Evidence linkage diagram** -- Mermaid flowchart showing topic -> unknowns -> sources, with source nodes color-coded by evidence strength (green=strong, amber=moderate, red=weak).
 
-5. **Applied Output** -- card showing the artifact produced and how it changes the active decision. Use a callout box with accent border.
+6. **Teach-back** -- use a `> [!abstract]` callout (highest visual prominence). Numbered list of 5-10 bullets in the learner's own words. This is the core of the card.
 
-6. **Confidence Meter** -- a visual progress bar or gauge showing confidence (0-100) with:
-   - Color gradient from red (0-30) through amber (31-60) to green (61-100)
-   - Remaining ambiguity listed below
-   - Next action to close ambiguity as a highlighted call-to-action
+7. **Applied Output** -- use a `> [!tip]` callout showing the artifact produced and how it changes the active decision.
+
+8. **Confidence Meter** -- inline HTML progress bar:
+   ```
+   <progress value="<N>" max="100"></progress> **<N>%**
+   ```
+   Below it, a `> [!info]` callout with:
+   - Remaining ambiguity
+   - Next action to close ambiguity (as a highlighted call-to-action)
 
 **Visual hierarchy:**
-- Sections 1, 4, and 6 should dominate (hero/elevated depth)
-- Sections 2-3 are supporting detail (default depth)
-- Section 5 is reference (flat/recessed depth)
+- Sections 1-2 and 6 dominate (hero: frontmatter properties panel + teach-back callout)
+- Sections 3-5 are supporting detail (question/example callouts + Mermaid diagram)
+- Sections 7-8 are reference (tip/info callouts + progress bar)
 
-Write to `~/.agent/diagrams/` with filename `learn-card-<topic-slug>.html`. Open in browser.
+Write to the Obsidian vault path: `<vault>/Progressive-Learning-OS/03-Learn-Cards/YYYY-MM-DD-<topic-slug>.md`
 
 $@
