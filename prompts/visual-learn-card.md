@@ -38,6 +38,9 @@ Generate an Obsidian-enriched markdown learn card using patterns from `reference
 5. **Evidence linkage diagram** -- Mermaid flowchart showing topic -> unknowns -> sources, with source nodes color-coded by evidence strength (green=strong, amber=moderate, red=weak).
 
 6. **Teach-back** -- use a `> [!abstract]` callout (highest visual prominence). Numbered list of 5-10 bullets in the learner's own words. This is the core of the card.
+   - **Format constraint:** Output ONLY a numbered list. Do NOT write prose paragraphs.
+   - **Negative constraint:** Do NOT embed graphs, tables, Mermaid diagrams, Chart.js blocks, or data visualizations inside the teach-back callout. No data blocks, no chart code, and no visual elements of any kind. These belong exclusively in the Evidence Plan and Evidence Linkage Diagram sections.
+   - **Voice:** Learner-direct, first-person statements -- e.g., "X works by...", "The key tradeoff is...", "I was wrong about Y because..."
 
 7. **Applied Output** -- use a `> [!tip]` callout showing the artifact produced and how it changes the active decision.
 

@@ -54,6 +54,13 @@ flowchart LR
 
 ## Teach-back (in my own words)
 
+Format: **numbered list only** (5-10 items). Write each item as a plain, first-person statement of understanding. Use learner-direct voice: "X works by...", "The key tradeoff is...", "I was wrong about Y because..."
+
+**Anti-patterns -- do NOT include in teach-back:**
+- No graphs, tables, Mermaid diagrams, Chart.js blocks, or data visualizations
+- No prose paragraphs or colloquial rambling
+- No embedded evidence or source citations (those belong in the Evidence Plan section)
+
 > [!abstract] Teach-back
 > 1.
 > 2.

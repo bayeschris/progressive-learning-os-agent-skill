@@ -188,7 +188,13 @@ flowchart LR
 
 ```markdown
 > [!abstract] Teach-back
-> In my own words, the key insight is...
+> 1. X works by doing Y under condition Z.
+> 2. The key tradeoff between A and B is latency vs. throughput.
+> 3. I initially thought C, but evidence shows D instead.
+> 4. The stop rule fires when metric M drops below threshold T.
+> 5. Applied artifact: risk matrix updated with new confidence score.
+>
+> _Format: numbered list only. Do not embed graphs, tables, Mermaid diagrams, or data blocks in the teach-back callout._
 
 > [!danger] Stop Rule
 > If metric X drops below threshold Y, escalate to KILL.
