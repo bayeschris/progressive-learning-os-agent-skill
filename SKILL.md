@@ -90,6 +90,19 @@ Available visual prompts:
 - `prompts/visual-execution-board.md` -- execution boards with KPI callouts, Mermaid timelines, and task status indicators
 Output stays in the Obsidian vault alongside the standard markdown artifacts.
 
+## 15) Calibrate complexity before presenting dense tables
+Use `references/18-obsidian-enriched-patterns.md` (Table Legend pattern).
+
+**Table density gate -- apply BEFORE rendering:**
+- **5+ columns in a single table:** Precede the table with a `> [!info] Reading this table` callout that names each column and its meaning in one sentence.
+- **3+ tables in a single output:** Introduce each table with a one-line context sentence explaining what the table maps (e.g., "This table maps enzyme names to substrate specificity and optimal pH ranges").
+- **Both conditions met:** Use both the per-table context sentence AND the column-legend callout for the densest table.
+
+**Adaptive fallback -- apply when user shows confusion:**
+- If the user asks about only a subset of columns, requests clarification on table structure, or expresses confusion about a prior structured output, default the next output to narrative prose with highlighted key terms instead of tables.
+- Re-introduce table-heavy content only after the user confirms understanding of the simplified format.
+- Track comprehension signals: questions about column meanings, requests to "explain the table," or engagement with fewer than half the presented columns indicate the density exceeded the user's current comfort level.
+
 ## Rules
 - Never keep claims unlinked to evidence in evidence-required domains.
 - Never block objective-critical execution waiting for perfect understanding; ship with explicit uncertainty + falsification next step.
