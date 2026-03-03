@@ -40,13 +40,17 @@ timeline
 > - [ ] High-priority evidence gaps reduced
 > - [ ] At least one key assumption falsified or strengthened
 > - [ ] Updated Go/Hold/Kill with clearer thresholds
+> - [ ] Evidence tier labels assigned to all cited sources (tier 1-5)
+> - [ ] Any claims backed only by tier 4-5 evidence explicitly flagged as speculative or unverified
 
 ## v0.3 (execution-ready)
 
 > [!success] v0.3 Criteria
 > - [ ] Selected path tied to explicit evidence
+> - [ ] Execution-critical claims backed by peer-reviewed or preprint evidence (tier 1-2); if only tier 4-5 evidence exists, the approach is flagged as speculative with a verification step in day 0-1
 > - [ ] Operational plan for day 0-7 complete
 > - [ ] Stop rules and rollback triggers explicit
+> - [ ] Source quality assessment completed: all evidence tier labels verified and no unverified claims treated as confirmed
 
 ## Promotion note (required every version)
 
@@ -54,6 +58,8 @@ timeline
 > - **What changed:**
 > - **Why it changed:**
 > - **What remains uncertain:**
+> - **Evidence quality assessment:** (Summarize the highest and lowest evidence tiers supporting key claims. Flag any execution-critical claims relying on tier 4-5 sources.)
+> - **Speculative elements:** (List any approaches or claims in the plan that are based on tier 4-5 evidence and require verification.)
 
 ---
 
@@ -70,16 +76,22 @@ Required:
 - High-priority evidence gaps reduced
 - At least one key assumption falsified or strengthened
 - Updated Go/Hold/Kill with clearer thresholds
+- Evidence tier labels assigned to all cited sources (tier 1-5)
+- Any claims backed only by tier 4-5 evidence explicitly flagged as speculative or unverified
 
 ## v0.3 (execution-ready)
 Required:
 - Selected path tied to explicit evidence
+- Execution-critical claims backed by peer-reviewed or preprint evidence (tier 1-2); if only tier 4-5 evidence exists, flag as speculative with verification step in day 0-1
 - Operational plan for day 0-7 complete
 - Stop rules and rollback triggers explicit
+- Source quality assessment completed: all evidence tier labels verified
 
 ## Promotion note (required every version)
 - What changed:
 - Why it changed:
 - What remains uncertain:
+- Evidence quality assessment: (highest/lowest evidence tiers for key claims)
+- Speculative elements: (claims based on tier 4-5 evidence requiring verification)
 
 </details>

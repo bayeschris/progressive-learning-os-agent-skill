@@ -29,9 +29,50 @@ For each top risk, create a Learn Card with:
 - teach-back summary
 - applied artifact
 
-## 4) Gather and grade evidence
+## 4) Gather, grade, and tier-label evidence
+
+### Source reliability tier system
+
+Every factual claim must be tagged with its evidence tier at the point of use. Use these tiers consistently across all outputs (learn cards, decision packets, execution plans, publishing artifacts):
 If biomedical/scientific, use evidence-only workflow and cite PMID/DOI/URL. Also check the study design classification from step 1; if observational or retrospective, ensure evidence gathering focuses on observational methods and does not assume interventional capability.
+
+| Tier | Label | Examples |
+|------|-------|---------|
+| 1 | `[peer-reviewed]` | Published papers, systematic reviews, meta-analyses |
+| 2 | `[preprint]` | arXiv, bioRxiv, medRxiv -- not yet peer-reviewed |
+| 3 | `[industry-report]` | White papers, technical reports from recognized bodies |
+| 4 | `[press-release]` | Company announcements, PR wire, blog posts |
+| 5 | `[unverified / no source]` | No citation found; assumption only |
+
+### Mandatory inline citation with tier label
+
+When the skill makes a factual claim in any output (learn card, decision packet, execution plan), it must cite the source and its tier label inline. Example:
+
+```
+AAV9 has demonstrated CNS tropism in non-human primates. [press-release -- Voyager Therapeutics, 2023; no peer-reviewed confirmation found]
+```
+
+Never present a tier 4-5 claim with the same confidence framing as a tier 1-2 claim. If only tier 4-5 sources exist for a claim, prefix it with "Unverified:" or "Speculative:" and include the tier label.
+
+### Plan viability gate
+
+Before committing to a specific technology, vector, compound, or approach in the execution plan (step 6), the skill must check:
+- Does peer-reviewed evidence (tier 1-2) support this choice?
+- If only tier 3 evidence exists, note the limitation and include a verification step in the first two days of the execution plan.
+- If only tier 4-5 evidence exists, the plan must explicitly flag the approach as **speculative** and include a verification step as the day-0 or day-1 action. The decision packet must not be promoted to v0.3 until the speculative claim is either verified or replaced.
+
+### Conservative confidence scoring
+
+Confidence scores in learn cards must reflect source quality:
+- **Tier 1-2 sources only:** standard confidence range applies (0-100%)
+- **Tier 3 sources:** cap confidence at 60%
+- **Tier 4-5 sources only:** cap confidence at 35% and add a `> [!warning] Low evidence quality` callout explaining that the confidence is capped due to the absence of peer-reviewed or preprint-level evidence
+
+### Evidence workflow
+
+If biomedical/scientific, use evidence-only workflow and cite PMID/DOI/URL.
 Map each source to a specific claim in the active Learn Card.
+Assign each source its tier label (1-5) and ensure the tier label appears alongside the citation in every artifact that references it.
 
 ## 5) Promote decision packet by version
 Use `references/04-version-promotion-rubric.md`.
@@ -92,12 +133,28 @@ Available visual prompts:
 - `prompts/visual-execution-board.md` -- execution boards with KPI callouts, Mermaid timelines, and task status indicators
 Output stays in the Obsidian vault alongside the standard markdown artifacts.
 
+## 15) Calibrate complexity before presenting dense tables
+Use `references/18-obsidian-enriched-patterns.md` (Table Legend pattern).
+
+**Table density gate -- apply BEFORE rendering:**
+- **5+ columns in a single table:** Precede the table with a `> [!info] Reading this table` callout that names each column and its meaning in one sentence.
+- **3+ tables in a single output:** Introduce each table with a one-line context sentence explaining what the table maps (e.g., "This table maps enzyme names to substrate specificity and optimal pH ranges").
+- **Both conditions met:** Use both the per-table context sentence AND the column-legend callout for the densest table.
+
+**Adaptive fallback -- apply when user shows confusion:**
+- If the user asks about only a subset of columns, requests clarification on table structure, or expresses confusion about a prior structured output, default the next output to narrative prose with highlighted key terms instead of tables.
+- Re-introduce table-heavy content only after the user confirms understanding of the simplified format.
+- Track comprehension signals: questions about column meanings, requests to "explain the table," or engagement with fewer than half the presented columns indicate the density exceeded the user's current comfort level.
+
 ## Rules
 - Never keep claims unlinked to evidence in evidence-required domains.
+- Never present tier 4-5 claims (press releases, unverified) with the same confidence framing as tier 1-2 claims (peer-reviewed, preprints). Always disclose source quality proactively.
+- Never build an execution plan on tier 4-5 evidence without flagging the approach as speculative and including a verification step as a day-0 or day-1 action.
 - Never block objective-critical execution waiting for perfect understanding; ship with explicit uncertainty + falsification next step.
 - Prefer one strong completed loop over many partial loops.
 - Keep each artifact skimmable (target one page, bullets first).
 - Include “what changed and why” on every version promotion.
+- Every factual claim in an output artifact must carry an inline tier label (see step 4 tier table).
 
 ## Output bundle (minimum)
 - `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/01-Objective/YYYY-MM-DD-objective-and-gates.md`
