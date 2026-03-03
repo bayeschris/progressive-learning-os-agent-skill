@@ -79,6 +79,8 @@ Track KPI trendlines, ship research-method upgrades daily, and promote methods f
 Use `references/15-obsidian-organization.md`.
 Mirror each cycle’s outputs into `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/` with dated filenames and updated index links.
 
+On every file write, populate the `updated` and `updated-sections` frontmatter fields (see frontmatter convention in the organization reference). Additionally, insert an update-status callout block immediately after frontmatter in every skill-generated file to indicate what changed. Use `> [!info] Last updated: ...` when the file was modified this cycle, or `> [!note] No changes this cycle (last updated: ...)` when carried over unchanged. See `references/18-obsidian-enriched-patterns.md` for the update-status callout patterns.
+
 ## 14) Render complex artifacts with Obsidian-enriched markdown
 Use `references/17-visual-explainer-integration.md` and `references/18-obsidian-enriched-patterns.md`.
 When an artifact exceeds complexity thresholds (3+ unknowns on a learn card, decision packet promotion, 5+ tasks on an execution board, 4+ risk buckets), render it using enriched Obsidian patterns (Mermaid diagrams, callout blocks, Dataview-queryable frontmatter, Chart.js trend blocks, inline HTML status indicators).

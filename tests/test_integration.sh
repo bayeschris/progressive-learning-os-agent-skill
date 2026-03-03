@@ -277,6 +277,119 @@ for f in "${ref_templates[@]}"; do
 done
 
 # -------------------------------------------------------
+# Test 12: Frontmatter convention includes update fields
+# -------------------------------------------------------
+echo ""
+echo "--- Test 12: Frontmatter convention includes update tracking fields ---"
+
+OBSIDIAN_ORG="$PROJECT_ROOT/references/15-obsidian-organization.md"
+if [ -f "$OBSIDIAN_ORG" ]; then
+  if grep -q "updated:" "$OBSIDIAN_ORG"; then
+    pass "Obsidian organization doc includes 'updated' frontmatter field"
+  else
+    fail "Obsidian organization doc missing 'updated' frontmatter field"
+  fi
+  if grep -q "updated-sections:" "$OBSIDIAN_ORG"; then
+    pass "Obsidian organization doc includes 'updated-sections' frontmatter field"
+  else
+    fail "Obsidian organization doc missing 'updated-sections' frontmatter field"
+  fi
+else
+  fail "Obsidian organization doc does not exist"
+fi
+
+# -------------------------------------------------------
+# Test 13: Changed Today Dataview query in index specification
+# -------------------------------------------------------
+echo ""
+echo "--- Test 13: Changed Today Dataview query in index specification ---"
+
+if [ -f "$OBSIDIAN_ORG" ]; then
+  if grep -qi "Changed Today" "$OBSIDIAN_ORG"; then
+    pass "Obsidian organization doc includes 'Changed Today' query section"
+  else
+    fail "Obsidian organization doc missing 'Changed Today' query section"
+  fi
+  if grep -q 'updated = date(today)' "$OBSIDIAN_ORG"; then
+    pass "Obsidian organization doc has Dataview filter for today's updates"
+  else
+    fail "Obsidian organization doc missing Dataview filter for today's updates"
+  fi
+else
+  fail "Obsidian organization doc does not exist"
+fi
+
+# -------------------------------------------------------
+# Test 14: Pattern library frontmatter schemas include update fields
+# -------------------------------------------------------
+echo ""
+echo "--- Test 14: Pattern library frontmatter schemas include update fields ---"
+
+PATTERNS_REF="$PROJECT_ROOT/references/18-obsidian-enriched-patterns.md"
+if [ -f "$PATTERNS_REF" ]; then
+  # Count how many frontmatter schema blocks contain 'updated:' field
+  updated_count=$(grep -c "^updated:" "$PATTERNS_REF" 2>/dev/null || true)
+  updated_count=${updated_count:-0}
+  if [ "$updated_count" -ge 5 ]; then
+    pass "Pattern library has 'updated' field in all 5 frontmatter schemas ($updated_count found)"
+  else
+    fail "Pattern library missing 'updated' field in some schemas (found $updated_count, expected 5)"
+  fi
+  updated_sections_count=$(grep -c "^updated-sections:" "$PATTERNS_REF" 2>/dev/null || true)
+  updated_sections_count=${updated_sections_count:-0}
+  if [ "$updated_sections_count" -ge 5 ]; then
+    pass "Pattern library has 'updated-sections' field in all 5 frontmatter schemas ($updated_sections_count found)"
+  else
+    fail "Pattern library missing 'updated-sections' field in some schemas (found $updated_sections_count, expected 5)"
+  fi
+else
+  fail "Pattern library file does not exist"
+fi
+
+# -------------------------------------------------------
+# Test 15: Pattern library includes update-status callout patterns
+# -------------------------------------------------------
+echo ""
+echo "--- Test 15: Pattern library includes update-status callout patterns ---"
+
+if [ -f "$PATTERNS_REF" ]; then
+  if grep -q 'Last updated:' "$PATTERNS_REF"; then
+    pass "Pattern library includes update-status callout example (Last updated)"
+  else
+    fail "Pattern library missing update-status callout example (Last updated)"
+  fi
+  if grep -q 'No changes this cycle' "$PATTERNS_REF"; then
+    pass "Pattern library includes no-changes callout example"
+  else
+    fail "Pattern library missing no-changes callout example"
+  fi
+else
+  fail "Pattern library file does not exist"
+fi
+
+# -------------------------------------------------------
+# Test 16: SKILL.md includes update-status callout instruction
+# -------------------------------------------------------
+echo ""
+echo "--- Test 16: SKILL.md includes update-status callout instruction ---"
+
+SKILL_FILE="$PROJECT_ROOT/SKILL.md"
+if [ -f "$SKILL_FILE" ]; then
+  if grep -qi "update-status callout\|update.status callout" "$SKILL_FILE"; then
+    pass "SKILL.md includes update-status callout instruction"
+  else
+    fail "SKILL.md missing update-status callout instruction"
+  fi
+  if grep -q "updated" "$SKILL_FILE" && grep -q "updated-sections" "$SKILL_FILE"; then
+    pass "SKILL.md references updated and updated-sections frontmatter fields"
+  else
+    fail "SKILL.md missing reference to updated/updated-sections frontmatter fields"
+  fi
+else
+  fail "SKILL.md does not exist"
+fi
+
+# -------------------------------------------------------
 # Summary
 # -------------------------------------------------------
 echo ""
