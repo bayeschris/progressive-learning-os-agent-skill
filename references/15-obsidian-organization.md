@@ -42,8 +42,14 @@ Every note gets at minimum:
 ---
 type: <artifact-type>
 date: YYYY-MM-DD
+updated: YYYY-MM-DD
+updated-sections: "<comma-separated list of changed sections>"
 ---
 ```
+
+- `date` records the creation date of the note.
+- `updated` records the date the note was last modified. Set to the same value as `date` on first creation.
+- `updated-sections` lists which sections were changed on the last update (e.g., `"evidence-plan, confidence-score"`). Set to `"initial"` on first creation.
 
 Full frontmatter schemas for each artifact type are defined in `references/18-obsidian-enriched-patterns.md` section A.
 
@@ -109,6 +115,14 @@ FROM "Progressive-Learning-OS/05-Execution"
 WHERE type = "execution-board"
 SORT date-range DESC
 LIMIT 3
+```
+
+## Changed Today
+```dataview
+TABLE updated-sections, updated
+FROM "Progressive-Learning-OS"
+WHERE updated = date(today)
+SORT file.folder ASC
 ```
 ````
 

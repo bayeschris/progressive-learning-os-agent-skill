@@ -17,6 +17,8 @@ confidence: <0-100>
 status: open | partial | resolved
 unknowns-count: <integer>
 date: YYYY-MM-DD
+updated: YYYY-MM-DD
+updated-sections: "<comma-separated list of changed sections>"
 objective-link: "[[YYYY-MM-DD-objective-and-gates]]"
 decision-packet-link: "[[YYYY-MM-DD-decision-packet-v0.x]]"
 ---
@@ -30,6 +32,8 @@ type: risk-breakdown
 risk-count: <integer>
 highest-kill-probability: high | medium | low
 date: YYYY-MM-DD
+updated: YYYY-MM-DD
+updated-sections: "<comma-separated list of changed sections>"
 ---
 ```
 
@@ -43,6 +47,8 @@ gate: go | hold | kill
 decision-date: YYYY-MM-DD
 evidence-count: <integer>
 previous-version: "[[YYYY-MM-DD-decision-packet-v0.x]]"
+updated: YYYY-MM-DD
+updated-sections: "<comma-separated list of changed sections>"
 ---
 ```
 
@@ -56,6 +62,8 @@ total-tasks: <integer>
 completed: <integer>
 blocked: <integer>
 days-remaining: <integer>
+updated: YYYY-MM-DD
+updated-sections: "<comma-separated list of changed sections>"
 ---
 ```
 
@@ -70,6 +78,8 @@ evidence-strength-ratio: "<value>"
 rework-count: <integer>
 false-lead-rate: "<value>"
 decision-reversals: <integer>
+updated: YYYY-MM-DD
+updated-sections: "<comma-separated list of changed sections>"
 ---
 ```
 
@@ -205,6 +215,20 @@ flowchart LR
 > [!note]- Detailed Evidence (click to expand)
 > Source 1: ...
 > Source 2: ...
+```
+
+### Update-status callout patterns
+
+Every skill-generated file should open with an update-status callout block immediately after frontmatter. Use `[!info]` when the file was updated this cycle, or `[!note]` when unchanged:
+
+```markdown
+> [!info] Last updated: 2026-03-02 — Evidence Plan revised, Confidence 40% -> 65%
+```
+
+If the file was not changed in the current cycle:
+
+```markdown
+> [!note] No changes this cycle (last updated: 2026-02-28)
 ```
 
 ---
