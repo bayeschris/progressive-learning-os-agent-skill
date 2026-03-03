@@ -14,7 +14,8 @@ Set up `core/`, `domains/`, and `domains/<domain>/tracks/<track>/` before genera
 
 ## 1) Lock objective and decision gate
 Use `references/01-objective-and-gates.md`.
-Output: one-page objective with Go/Hold/Kill and decision date.
+Classify the study design (experimental, quasi-experimental, observational, retrospective) before proceeding. If the objective or domain description contains signals like "natural history", "observational cohort", "registry study", "no intervention", or "disease progression tracking", set study design = observational. If observational or retrospective, set execution plan mode to observational-only and auto-populate out-of-scope constraints with "No treatment, no intervention, no randomization."
+Output: one-page objective with Go/Hold/Kill, decision date, and study design classification.
 
 ## 2) Decompose into top risks
 Use `references/02-risk-breakdown.md`.
@@ -29,7 +30,7 @@ For each top risk, create a Learn Card with:
 - applied artifact
 
 ## 4) Gather and grade evidence
-If biomedical/scientific, use evidence-only workflow and cite PMID/DOI/URL.
+If biomedical/scientific, use evidence-only workflow and cite PMID/DOI/URL. Also check the study design classification from step 1; if observational or retrospective, ensure evidence gathering focuses on observational methods and does not assume interventional capability.
 Map each source to a specific claim in the active Learn Card.
 
 ## 5) Promote decision packet by version
@@ -41,7 +42,8 @@ Promote only when promotion criteria are met:
 
 ## 6) Convert decision to immediate execution
 Use `references/05-day0-7-execution.md`.
-Output: day 0–7 board with owner, threshold, and stop trigger per task.
+Before generating tasks, verify no proposed task requires an intervention incompatible with the study design. If study design = observational or retrospective and a task implies intervention (treatment, vector, compound, protocol manipulation, randomization), flag it with a `> [!warning] Incompatible with observational study design` callout instead of including it. Use the observational study execution template for natural history, observational, or retrospective designs.
+Output: day 0-7 board with owner, threshold, and stop trigger per task.
 
 ## 7) Weekly learning closeout
 Use `references/06-weekly-learning-review.md`.

@@ -390,6 +390,150 @@ else
 fi
 
 # -------------------------------------------------------
+# Test 17: Study design classifier in objective template
+# -------------------------------------------------------
+echo ""
+echo "--- Test 17: Study design classifier in objective template ---"
+
+OBJ_TEMPLATE="$PROJECT_ROOT/references/01-objective-and-gates.md"
+if [ -f "$OBJ_TEMPLATE" ]; then
+  if grep -qi "study design" "$OBJ_TEMPLATE"; then
+    pass "Objective template contains study design section"
+  else
+    fail "Objective template missing study design section"
+  fi
+  if grep -qi "observational" "$OBJ_TEMPLATE"; then
+    pass "Objective template references observational design"
+  else
+    fail "Objective template missing observational design reference"
+  fi
+  if grep -qi "natural history" "$OBJ_TEMPLATE"; then
+    pass "Objective template references natural history studies"
+  else
+    fail "Objective template missing natural history reference"
+  fi
+  if grep -qi "experimental\|RCT" "$OBJ_TEMPLATE"; then
+    pass "Objective template references experimental/RCT design"
+  else
+    fail "Objective template missing experimental/RCT reference"
+  fi
+  if grep -qi "retrospective\|registry" "$OBJ_TEMPLATE"; then
+    pass "Objective template references retrospective/registry design"
+  else
+    fail "Objective template missing retrospective/registry reference"
+  fi
+  if grep -qi "out-of-scope.*intervention\|no treatment.*no intervention\|intervention.*prohibited" "$OBJ_TEMPLATE"; then
+    pass "Objective template has auto-population guidance for observational out-of-scope"
+  else
+    fail "Objective template missing auto-population guidance for observational out-of-scope"
+  fi
+else
+  fail "Objective template does not exist (skipping study design tests)"
+fi
+
+# -------------------------------------------------------
+# Test 18: SKILL.md study design detection
+# -------------------------------------------------------
+echo ""
+echo "--- Test 18: SKILL.md study design detection ---"
+
+if [ -f "$SKILL_FILE" ]; then
+  if grep -qi "study design" "$SKILL_FILE"; then
+    pass "SKILL.md contains study design reference"
+  else
+    fail "SKILL.md missing study design reference"
+  fi
+  if grep -qi "observational" "$SKILL_FILE"; then
+    pass "SKILL.md contains observational reference"
+  else
+    fail "SKILL.md missing observational reference"
+  fi
+  if grep -qi "incompatib\|intervention.*check\|design.*gate\|design.*constraint" "$SKILL_FILE"; then
+    pass "SKILL.md contains incompatibility/intervention gate reference"
+  else
+    fail "SKILL.md missing incompatibility/intervention gate reference"
+  fi
+else
+  fail "SKILL.md does not exist (skipping study design detection tests)"
+fi
+
+# -------------------------------------------------------
+# Test 19: Observational execution template
+# -------------------------------------------------------
+echo ""
+echo "--- Test 19: Observational execution template ---"
+
+EXEC_TEMPLATE="$PROJECT_ROOT/references/05-day0-7-execution.md"
+if [ -f "$EXEC_TEMPLATE" ]; then
+  if grep -qi "observational" "$EXEC_TEMPLATE"; then
+    pass "Execution template contains observational section"
+  else
+    fail "Execution template missing observational section"
+  fi
+  if grep -qi "cohort" "$EXEC_TEMPLATE"; then
+    pass "Execution template contains cohort task type"
+  else
+    fail "Execution template missing cohort task type"
+  fi
+  if grep -qi "endpoint" "$EXEC_TEMPLATE"; then
+    pass "Execution template contains endpoint task type"
+  else
+    fail "Execution template missing endpoint task type"
+  fi
+  if grep -qi "data collection" "$EXEC_TEMPLATE"; then
+    pass "Execution template contains data collection task type"
+  else
+    fail "Execution template missing data collection task type"
+  fi
+  if grep -qi "follow-up\|followup" "$EXEC_TEMPLATE"; then
+    pass "Execution template contains follow-up task type"
+  else
+    fail "Execution template missing follow-up task type"
+  fi
+  if grep -qi "statistical analysis" "$EXEC_TEMPLATE"; then
+    pass "Execution template contains statistical analysis task type"
+  else
+    fail "Execution template missing statistical analysis task type"
+  fi
+else
+  fail "Execution template does not exist (skipping observational template tests)"
+fi
+
+# -------------------------------------------------------
+# Test 20: Incompatibility gate for observational design
+# -------------------------------------------------------
+echo ""
+echo "--- Test 20: Incompatibility gate for observational design ---"
+
+incompatibility_found=false
+if [ -f "$EXEC_TEMPLATE" ]; then
+  if grep -qi "incompatible.*observational\|observational.*study.*design" "$EXEC_TEMPLATE"; then
+    incompatibility_found=true
+  fi
+fi
+if [ -f "$SKILL_FILE" ]; then
+  if grep -qi "incompatible.*observational\|observational.*study.*design" "$SKILL_FILE"; then
+    incompatibility_found=true
+  fi
+fi
+
+if [ "$incompatibility_found" = true ]; then
+  pass "Incompatibility gate reference found for observational study design"
+else
+  fail "Missing incompatibility gate reference for observational study design"
+fi
+
+if [ -f "$EXEC_TEMPLATE" ]; then
+  if grep -q '\[!warning\]' "$EXEC_TEMPLATE"; then
+    pass "Execution template contains warning callout for incompatibility"
+  else
+    fail "Execution template missing warning callout for incompatibility"
+  fi
+else
+  fail "Execution template does not exist (skipping warning callout test)"
+fi
+
+# -------------------------------------------------------
 # Summary
 # -------------------------------------------------------
 echo ""
