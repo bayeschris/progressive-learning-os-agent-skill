@@ -118,6 +118,50 @@ flowchart LR
 
 ---
 
+## Observational study execution template
+
+When the study design is classified as **observational** or **retrospective** (see `references/01-objective-and-gates.md` study design classification), use this template instead of the standard interventional task board above.
+
+### Incompatibility gate
+
+Before generating any task, verify it does not require applying an intervention. If a proposed task implies treatment, vector selection, compound administration, protocol manipulation, or randomization AND the study design = observational or retrospective, do NOT include it. Instead, insert:
+
+> [!warning] Incompatible with observational study design
+> Task "<task name>" requires an intervention (treatment / manipulation / randomization) that is structurally impossible in a natural history or observational study. Replace with an observational equivalent or remove.
+
+### Observational task categories
+
+Use these task types for observational / natural history study execution plans:
+
+1. **Cohort definition and inclusion/exclusion criteria finalization**
+   - Define the target population
+   - Specify inclusion and exclusion criteria
+   - Document recruitment or data extraction strategy
+
+2. **Endpoint and biomarker selection**
+   - Identify primary and secondary endpoints
+   - Select biomarkers for longitudinal tracking
+   - Define measurement instruments and their validation status
+
+3. **Data collection protocol design**
+   - Design case report forms or data extraction templates
+   - Specify data sources (electronic health records, registries, direct observation)
+   - Define data quality checks and monitoring procedures
+
+4. **Longitudinal follow-up schedule**
+   - Define visit or data collection time points
+   - Specify follow-up duration and intervals
+   - Plan for loss-to-follow-up mitigation
+
+5. **Statistical analysis plan**
+   - Descriptive statistics for cohort characterization
+   - Survival analysis (Kaplan-Meier, Cox regression) where applicable
+   - Trajectory modeling (mixed-effects models, latent class trajectories)
+   - Pre-specify sensitivity analyses
+   - Define handling of missing data
+
+---
+
 <details><summary>Plain-text version (no plugins required)</summary>
 
 ## Execution objective (week 1)
