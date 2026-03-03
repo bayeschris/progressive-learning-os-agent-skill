@@ -30,6 +30,9 @@ decision-packet-link: "[[YYYY-MM-DD-decision-packet-v0.x]]"
 
 ## Evidence plan
 
+> [!info] Table complexity note
+> If the evidence plan below contains 5+ columns or 3+ tables, precede each table with a column-legend callout (see `references/18-obsidian-enriched-patterns.md`, Table Legend pattern). Introduce each table with a one-line context sentence explaining what it maps.
+
 > [!example] Evidence Plan
 > **Source targets:** papers/docs/experts
 > - Source 1:

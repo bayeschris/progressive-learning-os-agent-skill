@@ -237,6 +237,44 @@ If the file was not changed in the current cycle:
 > [!note] No changes this cycle (last updated: 2026-02-28)
 ```
 
+### Table Legend callout pattern
+
+When a table has 5 or more columns, precede it with a Table Legend callout that explains each column in one sentence. When an output contains 3 or more tables, add a one-line context sentence before each table.
+
+**5+ column table -- column legend:**
+
+```markdown
+> [!info] Reading this table
+> - **Column 1 Name** -- what this column represents
+> - **Column 2 Name** -- what this column represents
+> - **Column 3 Name** -- what this column represents
+> - **Column 4 Name** -- what this column represents
+> - **Column 5 Name** -- what this column represents
+```
+
+**3+ tables in one output -- per-table context line:**
+
+```markdown
+_This table maps [entity type] to [relationship] and [key metric]._
+
+| Entity | Relationship | Key Metric | Detail 1 | Detail 2 |
+|--------|-------------|-----------|----------|----------|
+| ... | ... | ... | ... | ... |
+```
+
+**Adaptive fallback -- when user shows confusion:**
+
+If the user signals confusion about a table (asks about column meanings, engages with fewer than half the columns, or requests clarification), switch to narrative prose format:
+
+```markdown
+> [!info] Key findings (simplified)
+> **Term 1** -- explanation in plain language.
+> **Term 2** -- explanation in plain language.
+> **Term 3** -- explanation in plain language.
+>
+> _When you are ready for the full comparison table, let me know._
+```
+
 ---
 
 ## D) Inline HTML Components
