@@ -33,7 +33,17 @@ Generate an Obsidian-enriched markdown decision packet using patterns from `refe
 5. **Evidence Map** -- markdown table with columns:
    - Claim
    - Evidence source (PMID/DOI/URL or `[[wikilink]]`)
+   - Evidence tier badge -- render as inline span:
+     - `<span style="background:#27ae60;color:white;padding:2px 6px;border-radius:3px;font-size:0.85em">[peer-reviewed]</span>` (tier 1)
+     - `<span style="background:#2980b9;color:white;padding:2px 6px;border-radius:3px;font-size:0.85em">[preprint]</span>` (tier 2)
+     - `<span style="background:#f39c12;color:white;padding:2px 6px;border-radius:3px;font-size:0.85em">[industry-report]</span>` (tier 3)
+     - `<span style="background:#e74c3c;color:white;padding:2px 6px;border-radius:3px;font-size:0.85em">[press-release]</span>` (tier 4)
+     - `<span style="background:#95a5a6;color:white;padding:2px 6px;border-radius:3px;font-size:0.85em">[unverified / no source]</span>` (tier 5)
    - Strength: <span style="color:green">Strong</span> / <span style="color:#e68a00">Moderate</span> / <span style="color:red">Weak</span> / <span style="color:gray">Missing</span>
+
+   When a claim is supported only by tier 4-5 evidence, add a `> [!warning] Speculative` callout below the evidence map row explaining that this claim lacks peer-reviewed backing and should not be treated as confirmed.
+
+   **Plan viability flag:** If the selected path in the decision packet relies on tier 4-5 evidence for any execution-critical claim, add a `> [!warning] Unverified foundation` callout after the evidence map stating that the execution plan is built on speculative evidence and requires a verification step in day 0-1.
 
 6. **Promotion Criteria** -- use `> [!info]` callout with checkbox list showing criteria for the next version. Format met criteria with `- [x]` and unmet with `- [ ]`.
 
