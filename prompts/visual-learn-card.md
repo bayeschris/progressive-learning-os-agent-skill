@@ -33,9 +33,16 @@ Generate an Obsidian-enriched markdown learn card using patterns from `reference
 
 4. **Evidence Plan** -- use a `> [!example]` callout containing:
    - Source targets with `[[wikilinks]]` or URLs where available
+   - Each source must include an evidence tier badge rendered as an inline span:
+     - `<span style="background:#27ae60;color:white;padding:2px 6px;border-radius:3px;font-size:0.85em">[peer-reviewed]</span>` (tier 1)
+     - `<span style="background:#2980b9;color:white;padding:2px 6px;border-radius:3px;font-size:0.85em">[preprint]</span>` (tier 2)
+     - `<span style="background:#f39c12;color:white;padding:2px 6px;border-radius:3px;font-size:0.85em">[industry-report]</span>` (tier 3)
+     - `<span style="background:#e74c3c;color:white;padding:2px 6px;border-radius:3px;font-size:0.85em">[press-release]</span>` (tier 4)
+     - `<span style="background:#95a5a6;color:white;padding:2px 6px;border-radius:3px;font-size:0.85em">[unverified / no source]</span>` (tier 5)
    - Minimum evidence bar
+   - If all sources are tier 4-5 only, add a `> [!warning] Low evidence quality` callout within the Evidence Plan stating that no peer-reviewed or preprint evidence was found
 
-5. **Evidence linkage diagram** -- Mermaid flowchart showing topic -> unknowns -> sources, with source nodes color-coded by evidence strength (green=strong, amber=moderate, red=weak).
+5. **Evidence linkage diagram** -- Mermaid flowchart showing topic -> unknowns -> sources, with source nodes color-coded by evidence tier: tier 1-2 = green (strong), tier 3 = amber (moderate), tier 4-5 = red (weak). Each source node label must include the tier label (e.g., `[peer-reviewed] Smith et al. 2024`).
 
 6. **Teach-back** -- use a `> [!abstract]` callout (highest visual prominence). Numbered list of 5-10 bullets in the learner's own words. This is the core of the card.
    - **Format constraint:** Output ONLY a numbered list. Do NOT write prose paragraphs.
@@ -48,9 +55,18 @@ Generate an Obsidian-enriched markdown learn card using patterns from `reference
    ```
    <progress value="<N>" max="100"></progress> **<N>%**
    ```
+   Apply tier-based confidence caps before rendering:
+   - Tier 1-2 sources only: standard range (0-100%)
+   - Tier 3 sources: cap at 60%
+   - Tier 4-5 sources only: cap at 35%
+
    Below it, a `> [!info]` callout with:
+   - Highest evidence tier available
+   - Confidence cap applied (if any)
    - Remaining ambiguity
    - Next action to close ambiguity (as a highlighted call-to-action)
+
+   When confidence is capped due to tier 4-5 evidence, add a `> [!warning] Low evidence quality` callout explaining that confidence is capped at 35% because no peer-reviewed or preprint-level evidence supports the core claims.
 
 **Visual hierarchy:**
 - Sections 1-2 and 6 dominate (hero: frontmatter properties panel + teach-back callout)
