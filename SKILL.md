@@ -8,6 +8,32 @@ description: Run a tri-track system that advances objective execution while comp
 Execute this sequence every cycle. Keep artifacts short, explicit, and versioned.
 Run `references/09-tri-track-operating-system.md` continuously so execution speed is never gated by learning speed and publishing stays coupled to real work.
 
+## File-first output rule (MANDATORY)
+
+**Every substantive output — research, analysis, intelligence briefs, learn cards, decision packets, drill-ins, competitive intel, publishing drafts — MUST be written as a dated file in the Obsidian vault. Chat responses should contain only a brief summary (3-5 sentences) pointing the user to the file.**
+
+This is not optional. The skill produces durable artifacts, not ephemeral chat. If it's worth saying, it's worth filing.
+
+### Vault path resolution
+
+Resolve the Obsidian vault path in this order:
+1. **Explicit argument**: If the user passes `obsidian <vault-name>` in the skill invocation args, search `~/Documents/Obsidian/` for a vault matching that name.
+2. **Working directory detection**: If the current working directory or any parent contains `.obsidian/`, use that as the vault root.
+3. **Project memory**: Check project memory files for a previously stored vault path.
+4. **Ask once**: If none of the above resolve, ask the user for their vault path and store it in project memory for future sessions.
+
+Once resolved, write all outputs under `<vault-root>/Progressive-Learning-OS/` using the folder map defined in `references/15-obsidian-organization.md`.
+
+### Chat output format
+
+After writing each file, respond in chat with:
+- **File name and location** (so the user can find it in Obsidian)
+- **One-line summary** of what the file contains
+- **Key insight or decision** (the single most important takeaway)
+- **Next action** if applicable
+
+Do NOT duplicate the file's full content in chat.
+
 ## 0) Organize GitHub structure first
 Use `references/16-github-repo-organization.md`.
 Set up `core/`, `domains/`, and `domains/<domain>/tracks/<track>/` before generating outputs.
@@ -124,6 +150,20 @@ Mirror each cycle’s outputs into `domains/<domain>/tracks/<track>/obsidian/Pro
 
 On every file write, populate the `updated` and `updated-sections` frontmatter fields (see frontmatter convention in the organization reference). Additionally, insert an update-status callout block immediately after frontmatter in every skill-generated file to indicate what changed. Use `> [!info] Last updated: ...` when the file was modified this cycle, or `> [!note] No changes this cycle (last updated: ...)` when carried over unchanged. See `references/18-obsidian-enriched-patterns.md` for the update-status callout patterns.
 
+## 13b) Build the knowledge graph (MANDATORY)
+Use `references/19-knowledge-graph-linking.md`.
+
+**Every note must participate in a dense wikilink graph.** This is not optional — isolated notes with only bottom-of-page cross-links defeat the purpose of Obsidian.
+
+On every file write:
+1. **Inline-link shared concepts** on first mention per H2 section: tools, APIs, communities, stations, competitors, skills, and other documents. Use `[[Target|Display Text]]` alias syntax when needed.
+2. **Link in table cells** — when table rows reference hub-worthy entities (tools, stations, communities), wikilink them.
+3. **Include station flow** in cross-links if the document is part of a multi-stage workflow.
+4. **Create hub notes** for any tool, community, competitor, or concept that appears in 2+ documents. Hub notes live under `10-Hubs/{Stations,Skills,Tools,Communities,People,Competitors,Concepts}/`.
+5. **Run the linking checklist** from the reference before finalizing: stations, tools, communities, skills, competitors, cross-documents, parent link, station flow.
+
+Hub notes are short (template in reference) — they exist to accumulate backlinks and make Obsidian’s graph view useful.
+
 ## 14) Render complex artifacts with Obsidian-enriched markdown
 Use `references/17-visual-explainer-integration.md` and `references/18-obsidian-enriched-patterns.md`.
 When an artifact exceeds complexity thresholds (3+ unknowns on a learn card, decision packet promotion, 5+ tasks on an execution board, 4+ risk buckets), render it using enriched Obsidian patterns (Mermaid diagrams, callout blocks, Dataview-queryable frontmatter, Chart.js trend blocks, inline HTML status indicators).
@@ -147,6 +187,7 @@ Use `references/18-obsidian-enriched-patterns.md` (Table Legend pattern).
 - Track comprehension signals: questions about column meanings, requests to "explain the table," or engagement with fewer than half the presented columns indicate the density exceeded the user's current comfort level.
 
 ## Rules
+- **Never output research, analysis, or intelligence as chat-only. Every substantive output must be written as an Obsidian file first. Chat gets a summary.**
 - Never keep claims unlinked to evidence in evidence-required domains.
 - Never present tier 4-5 claims (press releases, unverified) with the same confidence framing as tier 1-2 claims (peer-reviewed, preprints). Always disclose source quality proactively.
 - Never build an execution plan on tier 4-5 evidence without flagging the approach as speculative and including a verification step as a day-0 or day-1 action.
@@ -166,3 +207,4 @@ Use `references/18-obsidian-enriched-patterns.md` (Table Legend pattern).
 - `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/07-Skill-Evolution/YYYY-MM-DD-skill-evolution-log.md`
 - `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/08-Research-Improvement/YYYY-MM-DD-research-improvement-log.md`
 - `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/00-Index/current-cycle.md`
+- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/10-Hubs/**/*.md` (hub notes for entities referenced in 2+ documents — see `references/19-knowledge-graph-linking.md`)

@@ -13,6 +13,14 @@ Store all run outputs under:
 - `06-Publishing/` -- LinkedIn/X/TikTok drafts + arXiv pathway notes
 - `07-Skill-Evolution/` -- skill upgrade logs + rubric scores
 - `08-Research-Improvement/` -- daily KPI logs and post-mortems
+- `10-Hubs/` -- knowledge graph hub notes (see `references/19-knowledge-graph-linking.md`)
+  - `Stations/` -- workflow stage hubs (e.g., `Station 1 - LISTEN.md`)
+  - `Skills/` -- Claude Code skill hubs
+  - `Tools/` -- external tool/API hubs (e.g., `PRAW.md`, `App Store Connect API.md`)
+  - `Communities/` -- online communities, groups, podcasts, channels
+  - `People/` -- key contacts, influencers
+  - `Competitors/` -- competitor product hubs
+  - `Concepts/` -- recurring strategic concepts
 
 ## Naming rules
 - Use date prefix: `YYYY-MM-DD-<slug>.md`
@@ -33,6 +41,8 @@ Every note should include:
 - `[[YYYY-MM-DD-execution-board]]` link
 
 Use `[[wikilinks]]` consistently so Obsidian's graph view and backlink panels work.
+
+**Beyond bottom-of-page cross-links**, apply inline wikilinks throughout body text per `references/19-knowledge-graph-linking.md`. Link tools, APIs, communities, stations, competitors, and sibling documents on first mention per H2 section. Create hub notes under `10-Hubs/` for entities referenced in 2+ documents.
 
 ## Frontmatter convention
 
