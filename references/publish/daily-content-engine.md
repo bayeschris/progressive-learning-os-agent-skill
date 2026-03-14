@@ -83,7 +83,7 @@ For the "learning of the day", always provide:
 - Learning includes novice + expert layers
 - At least one actionable takeaway for audience
 - 3 skill upgrades shipped and logged (what changed + why)
-- Skill upgrades scored with `references/13-skill-upgrade-scoring-rubric.md` (avg >=12; at least one >=15)
+- Skill upgrades scored with `references/improve/skill-upgrade-scoring-rubric.md` (avg >=12; at least one >=15)
 - No confidential or unverified claims
 
 ## Reusable prompt for generating daily drafts

@@ -1,9 +1,7 @@
 ---
-description: Render a Progressive Learning OS day 0-7 execution board as a styled HTML dashboard with task cards, progress indicators, and owner assignments
+description: Render a Progressive Learning OS day 0-7 execution board as an Obsidian-enriched markdown note with KPI callouts, Mermaid timelines, and task status indicators
 ---
-Load the visual-explainer skill, then generate a visual HTML dashboard for a day 0-7 execution board from the Progressive Learning OS.
-
-Follow the visual-explainer skill workflow. Read the reference template at `~/.claude/skills/visual-explainer/templates/data-table.html`, the architecture template at `~/.claude/skills/visual-explainer/templates/architecture.html`, and CSS patterns at `~/.claude/skills/visual-explainer/references/css-patterns.md` before generating. Use a blueprint or IDE-inspired aesthetic -- this is an operational dashboard, so favor clarity and density over decoration.
+Generate an Obsidian-enriched markdown execution board using patterns from `references/output/enriched-patterns.md` and the template in `references/cycle/06-execution-board.md`.
 
 **Data source:** Read the execution board content from:
 - `$1` if a file path is provided
@@ -11,56 +9,65 @@ Follow the visual-explainer skill workflow. Read the reference template at `~/.c
 
 **Page structure:**
 
-1. **Header** -- execution board title with date range (Day 0 date through Day 7 date). Use hero depth. Include a progress summary: X of Y tasks complete, Z blocked.
+1. **YAML frontmatter** -- populate the execution board schema:
+   ```yaml
+   ---
+   type: execution-board
+   date-range: "<start> to <end>"
+   total-tasks: <count>
+   completed: <count>
+   blocked: <count>
+   days-remaining: <count>
+   ---
+   ```
 
-2. **KPI Dashboard** -- hero-number cards showing:
-   - Total tasks (neutral)
-   - Completed (green)
-   - In progress (blue)
-   - Blocked (red)
-   - Days remaining (amber countdown)
-   Use the KPI card pattern with large numbers and trend indicators.
+2. **Header** -- execution board title as H1 with date range. Include a progress summary line: "X of Y tasks complete, Z blocked".
 
-3. **Timeline View** -- horizontal timeline bar showing Day 0 through Day 7 with:
-   - Current day highlighted
-   - Checkpoint markers at Day 1, Day 3, Day 7
-   - Task density indicators at each day
+3. **KPI Dashboard** -- use callout blocks as KPI cards:
+   - `> [!info] Total Tasks` with the count as bold large text
+   - `> [!success] Completed` with count
+   - `> [!danger] Blocked` with count (omit if zero)
+   - `> [!warning] Days Remaining` with countdown
 
-4. **Task Board** -- the core section. Render as a three-column layout:
-   - **Now** column: tasks in active execution (blue left border)
-   - **Next** column: tasks queued for upcoming days (amber left border)
-   - **Later** column: tasks for later in the cycle (dim/grey left border)
+4. **Timeline** -- Mermaid gantt chart showing Day 0 through Day 7 with:
+   - Checkpoint milestones at Day 1, Day 3, Day 7
+   - Task bars showing duration and dependencies
+   - Current day indicated in the date axis
 
-   Each task card includes:
+5. **Task Board** -- organized into three sections with status indicators:
+
+   **Now (active)** -- each task as a `> [!info]` callout containing:
    - Task name (prominent)
-   - Owner (monospace label)
-   - Success threshold (green badge)
-   - Stop/rollback trigger (red badge)
-   - Dependencies (linked task references)
-   - Status: done (green check), in progress (blue spinner), blocked (red X)
-   - Risk bucket link (which risk this task addresses)
+   - Owner, success threshold, stop/rollback trigger
+   - Dependencies as `[[wikilinks]]`
+   - Status: <span style="color:#3498db">In Progress</span>
 
-5. **Checkpoint Status** -- cards for Day 1, Day 3, and Day 7 checkpoints:
+   **Next (queued)** -- same format, status: <span style="color:gray">Pending</span>
+
+   **Later** -- same format, status: <span style="color:gray">Pending</span>
+
+6. **Task dependency diagram** -- Mermaid flowchart showing task relationships, nodes color-coded by status (green=done, blue=in-progress, red=blocked, gray=pending).
+
+7. **Checkpoint Status** -- `> [!info]` callouts for Day 1, Day 3, Day 7:
    - What should be true by this checkpoint
-   - Current status vs expected status
-   - Color-coded: on track (green), at risk (amber), behind (red)
+   - Current status vs expected
+   - Color indicator: <span style="color:green">On track</span> / <span style="color:#e68a00">At risk</span> / <span style="color:red">Behind</span>
 
-6. **Blockers** -- if any tasks are blocked, a dedicated section with:
+8. **Blockers** (if any) -- `> [!danger]` callouts, one per blocker:
    - Blocker description
-   - Linked risk or evidence gap
+   - Linked risk or evidence gap (`[[wikilink]]`)
    - Suggested unblock action
-   - Visual treatment: red-tinted cards with high visual weight
 
-7. **Daily Summary Footer** -- compact section showing:
+9. **Daily Summary Footer** -- `> [!quote]` callout with:
    - What changed today and why
    - Tasks carried forward
    - One-line status for stakeholders
 
 **Visual hierarchy:**
-- Sections 1-2 are the visual anchor (hero KPI cards, large numbers)
-- Sections 3-4 are the operational core (elevated, dense but readable)
-- Sections 5-7 are supporting context (default/flat depth)
+- Sections 1-3 are the visual anchor (frontmatter + KPI callouts)
+- Sections 4-6 are the operational core (Mermaid diagrams + task cards)
+- Sections 7-9 are supporting context (checkpoint callouts + blockers)
 
-Include responsive section navigation. Write to `~/.agent/diagrams/` with filename `execution-board-<date>.html`. Open in browser.
+Write to the Obsidian vault path: `<vault>/<slug>/05-Execution/YYYY-MM-DD-execution-board.md`
 
 $@
