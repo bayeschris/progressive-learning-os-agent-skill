@@ -39,5 +39,5 @@ At daily closeout, ship and log exactly 3 skill upgrades:
 - Upgrade 2 (merged)
 - Upgrade 3 (merged)
 
-Score each using `references/13-skill-upgrade-scoring-rubric.md` and log totals.
+Score each using `references/improve/skill-upgrade-scoring-rubric.md` and log totals.
 If fewer than 3 can be safely merged, log blockers and include a catch-up plan for next day.

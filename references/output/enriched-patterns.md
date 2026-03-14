@@ -318,7 +318,7 @@ Color interpretation (document in the note):
 
 ## E) Dataview Query Templates
 
-All queries assume notes are filed under the `Progressive-Learning-OS/` vault folder with proper frontmatter.
+All queries assume notes are filed under the `<slug>/` project folder in the vault with proper frontmatter. Replace `<slug>` with the actual project slug.
 
 ### Learn Card Dashboard
 
@@ -329,7 +329,7 @@ TABLE
   status AS "Status",
   unknowns-count AS "Unknowns",
   date AS "Date"
-FROM "Progressive-Learning-OS/03-Learn-Cards"
+FROM "<slug>/03-Learn-Cards"
 WHERE type = "learn-card"
 SORT confidence ASC
 GROUP BY risk-bucket
@@ -345,7 +345,7 @@ TABLE
   gate AS "Gate",
   evidence-count AS "Evidence",
   decision-date AS "Date"
-FROM "Progressive-Learning-OS/04-Research"
+FROM "<slug>/04-Research"
 WHERE type = "decision-packet"
 SORT decision-date DESC
 ```
@@ -360,7 +360,7 @@ TABLE
   completed AS "Done",
   blocked AS "Blocked",
   days-remaining AS "Days Left"
-FROM "Progressive-Learning-OS/05-Execution"
+FROM "<slug>/05-Execution"
 WHERE type = "execution-board"
 SORT date-range DESC
 ```
@@ -376,7 +376,7 @@ TABLE
   rework-count AS "Rework",
   false-lead-rate AS "FLR",
   decision-reversals AS "Reversals"
-FROM "Progressive-Learning-OS/08-Research-Improvement"
+FROM "<slug>/08-Research-Improvement"
 WHERE type = "research-improvement-log"
 SORT date DESC
 LIMIT 7
@@ -388,7 +388,7 @@ LIMIT 7
 ````markdown
 ```dataview
 LIST
-FROM "Progressive-Learning-OS/03-Learn-Cards"
+FROM "<slug>/03-Learn-Cards"
 WHERE type = "learn-card" AND risk-bucket = this.risk-bucket
 SORT confidence ASC
 ```

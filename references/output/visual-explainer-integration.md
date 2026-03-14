@@ -4,7 +4,7 @@
 
 The Progressive Learning OS renders complex artifacts using Obsidian-native enriched markdown: Mermaid diagrams, callout blocks, Dataview-queryable frontmatter, Chart.js trend blocks, and inline HTML status indicators. All output stays in the Obsidian vault alongside standard markdown artifacts -- no external tools or browser required.
 
-For the full pattern library, see `references/18-obsidian-enriched-patterns.md`.
+For the full pattern library, see `references/output/enriched-patterns.md`.
 
 ## Recommended Obsidian Plugins
 
@@ -28,9 +28,9 @@ Mermaid diagrams and callout blocks are built into Obsidian core -- no plugin ne
 | Learn Card (ref 03) | Frontmatter + callout-based sections + confidence gauge + Mermaid evidence linkage diagram | `prompts/visual-learn-card.md` |
 | Decision Packet (ref 04) | Frontmatter + Mermaid version timeline + Mermaid risk diagram + callout blocks for stop rules and gate | `prompts/visual-decision-packet.md` |
 | Day 0-7 Execution Board (ref 05) | Frontmatter + callout-based KPI cards + Mermaid timeline + task list with status indicators | `prompts/visual-execution-board.md` |
-| Risk Breakdown (ref 02) | Frontmatter + Mermaid risk hierarchy flowchart with color-coded kill probability | Use patterns from `references/18-obsidian-enriched-patterns.md` |
-| Weekly Learning Review (ref 06) | Chart.js KPI trend block + gap analysis callouts + Dataview cross-references | Use patterns from `references/18-obsidian-enriched-patterns.md` |
-| Publishing Bundle (ref 10) | Callout blocks per platform (LinkedIn/X/TikTok/arXiv) with status badges | Use patterns from `references/18-obsidian-enriched-patterns.md` |
+| Risk Breakdown (ref 02) | Frontmatter + Mermaid risk hierarchy flowchart with color-coded kill probability | Use patterns from `references/output/enriched-patterns.md` |
+| Weekly Learning Review (ref 06) | Chart.js KPI trend block + gap analysis callouts + Dataview cross-references | Use patterns from `references/output/enriched-patterns.md` |
+| Publishing Bundle (ref 10) | Callout blocks per platform (LinkedIn/X/TikTok/arXiv) with status badges | Use patterns from `references/output/enriched-patterns.md` |
 
 ### When to render with enriched patterns
 
@@ -48,12 +48,12 @@ Skip enriched rendering when:
 
 ## Output Location
 
-All visual outputs are written to the Obsidian vault under `Progressive-Learning-OS/` using the standard folder structure defined in `references/15-obsidian-organization.md`:
+All visual outputs are written to the Obsidian vault under `<slug>/` using the standard folder structure defined in `references/output/obsidian-organization.md`:
 
-- Learn cards: `Progressive-Learning-OS/03-Learn-Cards/YYYY-MM-DD-<topic>.md`
-- Decision packets: `Progressive-Learning-OS/04-Research/YYYY-MM-DD-decision-packet-v0.x.md`
-- Execution boards: `Progressive-Learning-OS/05-Execution/YYYY-MM-DD-execution-board.md`
-- Risk breakdowns: `Progressive-Learning-OS/02-Risks/YYYY-MM-DD-risk-breakdown.md`
+- Learn cards: `<slug>/03-Learn-Cards/YYYY-MM-DD-<topic>.md`
+- Decision packets: `<slug>/04-Research/YYYY-MM-DD-decision-packet-v0.x.md`
+- Execution boards: `<slug>/05-Execution/YYYY-MM-DD-execution-board.md`
+- Risk breakdowns: `<slug>/02-Risks/YYYY-MM-DD-risk-breakdown.md`
 
 The enriched markdown IS the artifact -- there is no separate visual layer. The same file renders as plain text in any markdown viewer and as rich visual content in Obsidian.
 

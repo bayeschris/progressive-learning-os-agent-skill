@@ -42,56 +42,56 @@ This checklist defines the acceptance criteria for issue #6 as verifiable checks
 
 ---
 
-## references/03-learn-card.md Checks
+## references/cycle/03-learn-card.md Checks
 
 ### CHECK-L1: Evidence Tier Labels in Evidence Plan
-- **File:** `references/03-learn-card.md`
+- **File:** `references/cycle/03-learn-card.md`
 - **Requirement:** Evidence Plan section must include tier labels for sources
 - **Pattern MUST exist:** `[peer-reviewed]` or `[preprint]` or tier label notation in Evidence plan section
 
 ### CHECK-L2: Source Tier Field in Template
-- **File:** `references/03-learn-card.md`
+- **File:** `references/cycle/03-learn-card.md`
 - **Requirement:** Source entries in Evidence Plan must have a tier/reliability indicator
 - **Pattern MUST exist:** `tier` (case-insensitive) in the Evidence plan area
 
 ### CHECK-L3: Confidence Cap Rules
-- **File:** `references/03-learn-card.md`
+- **File:** `references/cycle/03-learn-card.md`
 - **Requirement:** Confidence + gap section must include tier-based confidence cap rules
 - **Pattern MUST exist:** `cap` or `maximum` related to confidence scoring
 - **Pattern MUST exist:** `35` as cap for tier 4-5 sources
 - **Pattern MUST exist:** `60` as cap for tier 3 sources
 
 ### CHECK-L4: Low Evidence Warning Callout
-- **File:** `references/03-learn-card.md`
+- **File:** `references/cycle/03-learn-card.md`
 - **Requirement:** Warning callout for low evidence quality
 - **Pattern MUST exist:** `[!warning]` in context of low evidence quality
 
 ### CHECK-L5: Evidence Linkage Diagram Tier Integration
-- **File:** `references/03-learn-card.md`
+- **File:** `references/cycle/03-learn-card.md`
 - **Requirement:** Mermaid evidence linkage diagram legend or node labels should reference tiers
 - **Pattern MUST exist:** `tier` or tier label in or near the Mermaid diagram section
 
 ---
 
-## references/04-version-promotion-rubric.md Checks
+## references/cycle/05-version-promotion-rubric.md Checks
 
 ### CHECK-V1: Evidence Tier Requirement in v0.2
-- **File:** `references/04-version-promotion-rubric.md`
+- **File:** `references/cycle/05-version-promotion-rubric.md`
 - **Requirement:** v0.2 criteria must reference evidence tier quality
 - **Pattern MUST exist:** `tier` (case-insensitive) in v0.2 section
 
 ### CHECK-V2: Evidence Tier Requirement in v0.3
-- **File:** `references/04-version-promotion-rubric.md`
+- **File:** `references/cycle/05-version-promotion-rubric.md`
 - **Requirement:** v0.3 criteria must require peer-reviewed evidence for execution-critical claims
 - **Pattern MUST exist:** `tier` or `peer-reviewed` in v0.3 section
 
 ### CHECK-V3: Speculative Flag for Low-Tier Evidence
-- **File:** `references/04-version-promotion-rubric.md`
+- **File:** `references/cycle/05-version-promotion-rubric.md`
 - **Requirement:** Promotion note or criteria must flag when execution plan relies on tier 4-5 evidence
 - **Pattern MUST exist:** `speculative` or `tier 4` or `tier 5` or `unverified`
 
 ### CHECK-V4: Source Quality in Promotion Note
-- **File:** `references/04-version-promotion-rubric.md`
+- **File:** `references/cycle/05-version-promotion-rubric.md`
 - **Requirement:** Promotion note section must include source quality assessment
 - **Pattern MUST exist:** `source quality` or `evidence quality` or `evidence tier`
 
@@ -148,7 +148,7 @@ This checklist defines the acceptance criteria for issue #6 as verifiable checks
 - **Check:** All five tier labels appear in SKILL.md; other files reference the tier system defined in SKILL.md
 
 ### CHECK-X2: Confidence Cap Consistency
-- **Requirement:** The same cap values (60% for tier 3, 35% for tier 4-5) must be used in both SKILL.md and references/03-learn-card.md
+- **Requirement:** The same cap values (60% for tier 3, 35% for tier 4-5) must be used in both SKILL.md and references/cycle/03-learn-card.md
 - **Check:** Both files contain matching cap values
 
 ### CHECK-X3: Plan Viability Gate Consistency

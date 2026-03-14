@@ -35,10 +35,10 @@ if [ ! -f "$FILE1" ]; then
   fail "File does not exist: $FILE1"
 else
   # Check 1.1: Contains a table density gate section mentioning "5+ columns"
-  if grep -q "5+ columns" "$FILE1"; then
-    pass "SKILL.md contains '5+ columns' threshold in table density gate"
+  if grep -q "5+ column" "$FILE1"; then
+    pass "SKILL.md contains '5+ column' threshold in table density gate"
   else
-    fail "SKILL.md does NOT contain '5+ columns' threshold"
+    fail "SKILL.md does NOT contain '5+ column' threshold"
   fi
 
   # Check 1.2: Contains "3+ tables" threshold
@@ -70,60 +70,60 @@ else
   fi
 
   # Check 1.6: Contains section header for table complexity calibration
-  if grep -qiE "^## [0-9]+\).*table|^## [0-9]+\).*complexity.*calibrat|^## [0-9]+\).*dense table" "$FILE1"; then
-    pass "SKILL.md contains a numbered section for table complexity calibration"
+  if grep -qiE "table density|dense table|Table density gate" "$FILE1"; then
+    pass "SKILL.md contains a section for table complexity calibration"
   else
-    fail "SKILL.md does NOT contain a numbered section for table complexity calibration"
+    fail "SKILL.md does NOT contain a section for table complexity calibration"
   fi
 fi
 
 echo ""
 
 # ---------------------------------------------------------------------------
-# File 2: references/18-obsidian-enriched-patterns.md — Table Legend pattern
+# File 2: references/output/enriched-patterns.md — Table Legend pattern
 # ---------------------------------------------------------------------------
-FILE2="$REPO_ROOT/references/18-obsidian-enriched-patterns.md"
-echo "--- File 2: references/18-obsidian-enriched-patterns.md ---"
+FILE2="$REPO_ROOT/references/output/enriched-patterns.md"
+echo "--- File 2: references/output/enriched-patterns.md ---"
 
 if [ ! -f "$FILE2" ]; then
   fail "File does not exist: $FILE2"
 else
   # Check 2.1: Contains "Table Legend" subsection header
   if grep -qi "Table Legend" "$FILE2"; then
-    pass "18-obsidian-enriched-patterns.md contains 'Table Legend' subsection"
+    pass "enriched-patterns.md contains 'Table Legend' subsection"
   else
-    fail "18-obsidian-enriched-patterns.md does NOT contain 'Table Legend' subsection"
+    fail "enriched-patterns.md does NOT contain 'Table Legend' subsection"
   fi
 
   # Check 2.2: Contains "> [!info] Reading this table" example callout
   if grep -q "Reading this table" "$FILE2"; then
-    pass "18-obsidian-enriched-patterns.md contains 'Reading this table' callout example"
+    pass "enriched-patterns.md contains 'Reading this table' callout example"
   else
-    fail "18-obsidian-enriched-patterns.md does NOT contain 'Reading this table' callout example"
+    fail "enriched-patterns.md does NOT contain 'Reading this table' callout example"
   fi
 
   # Check 2.3: Contains adaptive fallback prose example with "Key findings (simplified)"
   if grep -qi "Key findings (simplified)" "$FILE2"; then
-    pass "18-obsidian-enriched-patterns.md contains 'Key findings (simplified)' fallback example"
+    pass "enriched-patterns.md contains 'Key findings (simplified)' fallback example"
   else
-    fail "18-obsidian-enriched-patterns.md does NOT contain 'Key findings (simplified)' fallback example"
+    fail "enriched-patterns.md does NOT contain 'Key findings (simplified)' fallback example"
   fi
 
   # Check 2.4: Contains per-table context line guidance for 3+ tables
   if grep -qiE "(3.*tables|per-table context|context sentence)" "$FILE2"; then
-    pass "18-obsidian-enriched-patterns.md contains per-table context line guidance"
+    pass "enriched-patterns.md contains per-table context line guidance"
   else
-    fail "18-obsidian-enriched-patterns.md does NOT contain per-table context line guidance"
+    fail "enriched-patterns.md does NOT contain per-table context line guidance"
   fi
 fi
 
 echo ""
 
 # ---------------------------------------------------------------------------
-# File 3: references/03-learn-card.md — Table preamble guidance
+# File 3: references/cycle/03-learn-card.md — Table preamble guidance
 # ---------------------------------------------------------------------------
-FILE3="$REPO_ROOT/references/03-learn-card.md"
-echo "--- File 3: references/03-learn-card.md ---"
+FILE3="$REPO_ROOT/references/cycle/03-learn-card.md"
+echo "--- File 3: references/cycle/03-learn-card.md ---"
 
 if [ ! -f "$FILE3" ]; then
   fail "File does not exist: $FILE3"
@@ -135,7 +135,7 @@ else
     fail "03-learn-card.md does NOT contain 'Table complexity note' callout"
   fi
 
-  # Check 3.2: References the Table Legend pattern in 18-obsidian-enriched-patterns.md
+  # Check 3.2: References the Table Legend pattern in enriched-patterns.md
   if grep -qi "Table Legend" "$FILE3"; then
     pass "03-learn-card.md references the Table Legend pattern"
   else

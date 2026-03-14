@@ -33,8 +33,8 @@ echo "--- Test 1: Required integration files exist ---"
 
 required_files=(
   "SKILL.md"
-  "references/17-visual-explainer-integration.md"
-  "references/18-obsidian-enriched-patterns.md"
+  "references/output/visual-explainer-integration.md"
+  "references/output/enriched-patterns.md"
   "prompts/visual-learn-card.md"
   "prompts/visual-decision-packet.md"
   "prompts/visual-execution-board.md"
@@ -60,13 +60,13 @@ else
   fail "SKILL.md does not reference visual rendering"
 fi
 
-if grep -q "17-visual-explainer-integration" "$PROJECT_ROOT/SKILL.md"; then
+if grep -q "visual-explainer-integration" "$PROJECT_ROOT/SKILL.md"; then
   pass "SKILL.md references integration guide"
 else
   fail "SKILL.md does not reference integration guide"
 fi
 
-if grep -q "18-obsidian-enriched-patterns" "$PROJECT_ROOT/SKILL.md"; then
+if grep -q "enriched-patterns" "$PROJECT_ROOT/SKILL.md"; then
   pass "SKILL.md references pattern library"
 else
   fail "SKILL.md does not reference pattern library"
@@ -78,7 +78,7 @@ fi
 echo ""
 echo "--- Test 3: Integration reference document structure ---"
 
-INTEGRATION_REF="$PROJECT_ROOT/references/17-visual-explainer-integration.md"
+INTEGRATION_REF="$PROJECT_ROOT/references/output/visual-explainer-integration.md"
 if [ -f "$INTEGRATION_REF" ]; then
   # Check for required sections
   for section in "Security" "Integration" "Output" "Obsidian"; do
@@ -158,13 +158,13 @@ done
 echo ""
 echo "--- Test 6: Obsidian-native output references ---"
 
-if grep -rq 'Obsidian vault' "$PROJECT_ROOT/references/17-visual-explainer-integration.md" 2>/dev/null; then
+if grep -rq 'Obsidian vault' "$PROJECT_ROOT/references/output/visual-explainer-integration.md" 2>/dev/null; then
   pass "Integration doc references Obsidian vault output"
 else
   fail "Integration doc does not reference Obsidian vault output"
 fi
 
-if grep -rq 'Progressive-Learning-OS' "$PROJECT_ROOT/references/17-visual-explainer-integration.md" 2>/dev/null; then
+if grep -rq '<slug>/' "$PROJECT_ROOT/references/output/visual-explainer-integration.md" 2>/dev/null; then
   pass "Integration doc references vault folder structure"
 else
   fail "Integration doc does not reference vault folder structure"
@@ -236,7 +236,7 @@ done
 echo ""
 echo "--- Test 10: Pattern library completeness ---"
 
-PATTERNS_REF="$PROJECT_ROOT/references/18-obsidian-enriched-patterns.md"
+PATTERNS_REF="$PROJECT_ROOT/references/output/enriched-patterns.md"
 if [ -f "$PATTERNS_REF" ]; then
   for section in "Frontmatter" "Mermaid" "Callout" "Inline HTML" "Dataview" "Chart"; do
     if grep -qi "$section" "$PATTERNS_REF"; then
@@ -256,11 +256,11 @@ echo ""
 echo "--- Test 11: Reference templates have frontmatter schemas ---"
 
 ref_templates=(
-  "references/02-risk-breakdown.md"
-  "references/03-learn-card.md"
-  "references/04-version-promotion-rubric.md"
-  "references/05-day0-7-execution.md"
-  "references/06-weekly-learning-review.md"
+  "references/cycle/02-risk-breakdown.md"
+  "references/cycle/03-learn-card.md"
+  "references/cycle/05-version-promotion-rubric.md"
+  "references/cycle/06-execution-board.md"
+  "references/cycle/07-weekly-learning-review.md"
 )
 
 for f in "${ref_templates[@]}"; do
@@ -282,7 +282,7 @@ done
 echo ""
 echo "--- Test 12: Frontmatter convention includes update tracking fields ---"
 
-OBSIDIAN_ORG="$PROJECT_ROOT/references/15-obsidian-organization.md"
+OBSIDIAN_ORG="$PROJECT_ROOT/references/output/obsidian-organization.md"
 if [ -f "$OBSIDIAN_ORG" ]; then
   if grep -q "updated:" "$OBSIDIAN_ORG"; then
     pass "Obsidian organization doc includes 'updated' frontmatter field"
@@ -325,7 +325,7 @@ fi
 echo ""
 echo "--- Test 14: Pattern library frontmatter schemas include update fields ---"
 
-PATTERNS_REF="$PROJECT_ROOT/references/18-obsidian-enriched-patterns.md"
+PATTERNS_REF="$PROJECT_ROOT/references/output/enriched-patterns.md"
 if [ -f "$PATTERNS_REF" ]; then
   # Count how many frontmatter schema blocks contain 'updated:' field
   updated_count=$(grep -c "^updated:" "$PATTERNS_REF" 2>/dev/null || true)
@@ -395,7 +395,7 @@ fi
 echo ""
 echo "--- Test 17: Study design classifier in objective template ---"
 
-OBJ_TEMPLATE="$PROJECT_ROOT/references/01-objective-and-gates.md"
+OBJ_TEMPLATE="$PROJECT_ROOT/references/cycle/01-objective-and-gates.md"
 if [ -f "$OBJ_TEMPLATE" ]; then
   if grep -qi "study design" "$OBJ_TEMPLATE"; then
     pass "Objective template contains study design section"
@@ -463,7 +463,7 @@ fi
 echo ""
 echo "--- Test 19: Observational execution template ---"
 
-EXEC_TEMPLATE="$PROJECT_ROOT/references/05-day0-7-execution.md"
+EXEC_TEMPLATE="$PROJECT_ROOT/references/cycle/06-execution-board.md"
 if [ -f "$EXEC_TEMPLATE" ]; then
   if grep -qi "observational" "$EXEC_TEMPLATE"; then
     pass "Execution template contains observational section"

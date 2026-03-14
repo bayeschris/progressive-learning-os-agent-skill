@@ -1,7 +1,7 @@
 ---
 description: Render a Progressive Learning OS learn card as an Obsidian-enriched markdown note with Mermaid diagrams, callout blocks, and confidence gauges
 ---
-Generate an Obsidian-enriched markdown learn card using patterns from `references/18-obsidian-enriched-patterns.md` and the template structure in `references/03-learn-card.md`.
+Generate an Obsidian-enriched markdown learn card using patterns from `references/output/enriched-patterns.md` and the template structure in `references/cycle/03-learn-card.md`.
 
 **Data source:** Read the learn card content from:
 - `$1` if a file path is provided
@@ -73,6 +73,6 @@ Generate an Obsidian-enriched markdown learn card using patterns from `reference
 - Sections 3-5 are supporting detail (question/example callouts + Mermaid diagram)
 - Sections 7-8 are reference (tip/info callouts + progress bar)
 
-Write to the Obsidian vault path: `<vault>/Progressive-Learning-OS/03-Learn-Cards/YYYY-MM-DD-<topic-slug>.md`
+Write to the Obsidian vault path: `<vault>/<slug>/03-Learn-Cards/YYYY-MM-DD-<topic-slug>.md`
 
 $@

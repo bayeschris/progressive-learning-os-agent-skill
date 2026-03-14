@@ -22,7 +22,7 @@ Before proceeding, classify the study design. This determines what types of exec
 
 > [!important] If study design = observational or retrospective
 > Auto-populate "Out-of-scope paths" below with: "No treatment, no intervention, no randomization — intervention is prohibited in this study type."
-> Switch execution plan mode to observational-only (see `references/05-day0-7-execution.md` observational template).
+> Switch execution plan mode to observational-only (see `references/cycle/06-execution-board.md` observational template).
 
 ## Decision question
 - By the decision date, what exact choice must be made?

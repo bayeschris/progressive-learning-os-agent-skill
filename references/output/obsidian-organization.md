@@ -1,7 +1,7 @@
 # Obsidian Organization Standard
 
 Store all run outputs under:
-`obsidian/Progressive-Learning-OS/`
+`<vault>/<slug>/`
 
 ## Folder map
 - `00-Index/` -- navigation notes and current cycle links
@@ -13,7 +13,7 @@ Store all run outputs under:
 - `06-Publishing/` -- LinkedIn/X/TikTok drafts + arXiv pathway notes
 - `07-Skill-Evolution/` -- skill upgrade logs + rubric scores
 - `08-Research-Improvement/` -- daily KPI logs and post-mortems
-- `10-Hubs/` -- knowledge graph hub notes (see `references/19-knowledge-graph-linking.md`)
+- `10-Hubs/` -- knowledge graph hub notes (see `references/output/knowledge-graph-linking.md`)
   - `Stations/` -- workflow stage hubs (e.g., `Station 1 - LISTEN.md`)
   - `Skills/` -- Claude Code skill hubs
   - `Tools/` -- external tool/API hubs (e.g., `PRAW.md`, `App Store Connect API.md`)
@@ -42,7 +42,7 @@ Every note should include:
 
 Use `[[wikilinks]]` consistently so Obsidian's graph view and backlink panels work.
 
-**Beyond bottom-of-page cross-links**, apply inline wikilinks throughout body text per `references/19-knowledge-graph-linking.md`. Link tools, APIs, communities, stations, competitors, and sibling documents on first mention per H2 section. Create hub notes under `10-Hubs/` for entities referenced in 2+ documents.
+**Beyond bottom-of-page cross-links**, apply inline wikilinks throughout body text per `references/output/knowledge-graph-linking.md`. Link tools, APIs, communities, stations, competitors, and sibling documents on first mention per H2 section. Create hub notes under `10-Hubs/` for entities referenced in 2+ documents.
 
 ## Frontmatter convention
 
@@ -61,7 +61,7 @@ updated-sections: "<comma-separated list of changed sections>"
 - `updated` records the date the note was last modified. Set to the same value as `date` on first creation.
 - `updated-sections` lists which sections were changed on the last update (e.g., `"evidence-plan, confidence-score"`). Set to `"initial"` on first creation.
 
-Full frontmatter schemas for each artifact type are defined in `references/18-obsidian-enriched-patterns.md` section A.
+Full frontmatter schemas for each artifact type are defined in `references/output/enriched-patterns.md` section A.
 
 | Artifact | Required `type` value |
 |----------|-----------------------|
@@ -83,11 +83,11 @@ Full frontmatter schemas for each artifact type are defined in `references/18-ob
 | **Kanban** | Convert execution board task lists into visual kanban boards |
 | **Templater** | Insert templates with dynamic date substitution |
 
-See `references/17-visual-explainer-integration.md` for install instructions.
+See `references/output/visual-explainer-integration.md` for install instructions.
 
 ## Enriched markdown conventions
 
-All enriched rendering patterns (Mermaid diagrams, callout blocks, inline HTML, Dataview queries, Chart.js blocks) are documented in `references/18-obsidian-enriched-patterns.md`.
+All enriched rendering patterns (Mermaid diagrams, callout blocks, inline HTML, Dataview queries, Chart.js blocks) are documented in `references/output/enriched-patterns.md`.
 
 Key conventions:
 - Use callout blocks (`> [!type]`) for visual hierarchy instead of nested headers
@@ -103,7 +103,7 @@ Key conventions:
 ## Active Learn Cards
 ```dataview
 TABLE confidence, status, risk-bucket
-FROM "Progressive-Learning-OS/03-Learn-Cards"
+FROM "<slug>/03-Learn-Cards"
 WHERE type = "learn-card"
 SORT date DESC
 LIMIT 10
@@ -112,7 +112,7 @@ LIMIT 10
 ## Decision Packets
 ```dataview
 TABLE version, gate, decision-date
-FROM "Progressive-Learning-OS/04-Research"
+FROM "<slug>/04-Research"
 WHERE type = "decision-packet"
 SORT decision-date DESC
 LIMIT 5
@@ -121,7 +121,7 @@ LIMIT 5
 ## Recent Execution Boards
 ```dataview
 TABLE total-tasks, completed, blocked, days-remaining
-FROM "Progressive-Learning-OS/05-Execution"
+FROM "<slug>/05-Execution"
 WHERE type = "execution-board"
 SORT date-range DESC
 LIMIT 3
@@ -130,7 +130,7 @@ LIMIT 3
 ## Changed Today
 ```dataview
 TABLE updated-sections, updated
-FROM "Progressive-Learning-OS"
+FROM "<slug>"
 WHERE updated = date(today)
 SORT file.folder ASC
 ```

@@ -31,11 +31,11 @@ decision-packet-link: "[[YYYY-MM-DD-decision-packet-v0.x]]"
 ## Evidence plan
 
 > [!info] Table complexity note
-> If the evidence plan below contains 5+ columns or 3+ tables, precede each table with a column-legend callout (see `references/18-obsidian-enriched-patterns.md`, Table Legend pattern). Introduce each table with a one-line context sentence explaining what it maps.
+> If the evidence plan below contains 5+ columns or 3+ tables, precede each table with a column-legend callout (see `references/output/enriched-patterns.md`, Table Legend pattern). Introduce each table with a one-line context sentence explaining what it maps.
 
 > [!example] Evidence Plan
 > **Source targets:** papers/docs/experts
-> Each source must include its evidence tier label (see SKILL.md step 4 tier table):
+> Each source must include its evidence tier label (see `references/cycle/04-evidence-tiers.md`):
 > - Source 1: `[tier label]` -- citation (PMID/DOI/URL)
 > - Source 2: `[tier label]` -- citation (PMID/DOI/URL)
 >

@@ -1,7 +1,7 @@
 ---
 description: Render a Progressive Learning OS decision packet as an Obsidian-enriched markdown note with Mermaid timelines, risk diagrams, and promotion criteria
 ---
-Generate an Obsidian-enriched markdown decision packet using patterns from `references/18-obsidian-enriched-patterns.md` and the rubric in `references/04-version-promotion-rubric.md`.
+Generate an Obsidian-enriched markdown decision packet using patterns from `references/output/enriched-patterns.md` and the rubric in `references/cycle/05-version-promotion-rubric.md`.
 
 **Data source:** Read the decision packet content from:
 - `$1` if a file path is provided
@@ -59,6 +59,6 @@ Generate an Obsidian-enriched markdown decision packet using patterns from `refe
 - Sections 4-5 are evidence and reasoning (Mermaid diagram + table)
 - Sections 6-8 are actionable outputs (checklists + callouts)
 
-Write to the Obsidian vault path: `<vault>/Progressive-Learning-OS/04-Research/YYYY-MM-DD-decision-packet-v0.x.md`
+Write to the Obsidian vault path: `<vault>/<slug>/04-Research/YYYY-MM-DD-decision-packet-v0.x.md`
 
 $@

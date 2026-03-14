@@ -120,7 +120,7 @@ flowchart LR
 
 ## Observational study execution template
 
-When the study design is classified as **observational** or **retrospective** (see `references/01-objective-and-gates.md` study design classification), use this template instead of the standard interventional task board above.
+When the study design is classified as **observational** or **retrospective** (see `references/cycle/01-objective-and-gates.md` study design classification), use this template instead of the standard interventional task board above.
 
 ### Incompatibility gate
 

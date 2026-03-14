@@ -28,10 +28,10 @@ echo "=== Teach-back Validation ==="
 echo ""
 
 # ---------------------------------------------------------------------------
-# File 1: references/03-learn-card.md
+# File 1: references/cycle/03-learn-card.md
 # ---------------------------------------------------------------------------
-FILE1="$REPO_ROOT/references/03-learn-card.md"
-echo "--- File 1: references/03-learn-card.md ---"
+FILE1="$REPO_ROOT/references/cycle/03-learn-card.md"
+echo "--- File 1: references/cycle/03-learn-card.md ---"
 
 if [ ! -f "$FILE1" ]; then
   fail "File does not exist: $FILE1"
@@ -108,10 +108,10 @@ fi
 echo ""
 
 # ---------------------------------------------------------------------------
-# File 3: references/18-obsidian-enriched-patterns.md
+# File 3: references/output/enriched-patterns.md
 # ---------------------------------------------------------------------------
-FILE3="$REPO_ROOT/references/18-obsidian-enriched-patterns.md"
-echo "--- File 3: references/18-obsidian-enriched-patterns.md ---"
+FILE3="$REPO_ROOT/references/output/enriched-patterns.md"
+echo "--- File 3: references/output/enriched-patterns.md ---"
 
 if [ ! -f "$FILE3" ]; then
   fail "File does not exist: $FILE3"

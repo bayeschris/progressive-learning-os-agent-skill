@@ -1,7 +1,7 @@
 ---
 description: Render a Progressive Learning OS day 0-7 execution board as an Obsidian-enriched markdown note with KPI callouts, Mermaid timelines, and task status indicators
 ---
-Generate an Obsidian-enriched markdown execution board using patterns from `references/18-obsidian-enriched-patterns.md` and the template in `references/05-day0-7-execution.md`.
+Generate an Obsidian-enriched markdown execution board using patterns from `references/output/enriched-patterns.md` and the template in `references/cycle/06-execution-board.md`.
 
 **Data source:** Read the execution board content from:
 - `$1` if a file path is provided
@@ -68,6 +68,6 @@ Generate an Obsidian-enriched markdown execution board using patterns from `refe
 - Sections 4-6 are the operational core (Mermaid diagrams + task cards)
 - Sections 7-9 are supporting context (checkpoint callouts + blockers)
 
-Write to the Obsidian vault path: `<vault>/Progressive-Learning-OS/05-Execution/YYYY-MM-DD-execution-board.md`
+Write to the Obsidian vault path: `<vault>/<slug>/05-Execution/YYYY-MM-DD-execution-board.md`
 
 $@

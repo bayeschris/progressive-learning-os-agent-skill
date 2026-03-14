@@ -6,205 +6,131 @@ description: Run a tri-track system that advances objective execution while comp
 # Progressive Learning OS
 
 Execute this sequence every cycle. Keep artifacts short, explicit, and versioned.
-Run `references/09-tri-track-operating-system.md` continuously so execution speed is never gated by learning speed and publishing stays coupled to real work.
+Run `references/system/tri-track-operating-system.md` continuously so execution speed is never gated by learning speed and publishing stays coupled to real work.
 
 ## File-first output rule (MANDATORY)
 
-**Every substantive output — research, analysis, intelligence briefs, learn cards, decision packets, drill-ins, competitive intel, publishing drafts — MUST be written as a dated file in the Obsidian vault. Chat responses should contain only a brief summary (3-5 sentences) pointing the user to the file.**
-
-This is not optional. The skill produces durable artifacts, not ephemeral chat. If it's worth saying, it's worth filing.
+**Every substantive output MUST be written as a dated file in the Obsidian vault. Chat gets a brief summary (3-5 sentences) pointing the user to the file.**
 
 ### Vault path resolution
 
 Resolve the Obsidian vault path in this order:
-1. **Explicit argument**: If the user passes `obsidian <vault-name>` in the skill invocation args, search `~/Documents/Obsidian/` for a vault matching that name.
-2. **Working directory detection**: If the current working directory or any parent contains `.obsidian/`, use that as the vault root.
+1. **Explicit argument**: If the user passes `obsidian <vault-name>`, search `~/Documents/Obsidian/` for a matching vault.
+2. **Working directory detection**: If the current working directory or any parent contains `.obsidian/`, use that as vault root.
 3. **Project memory**: Check project memory files for a previously stored vault path.
-4. **Ask once**: If none of the above resolve, ask the user for their vault path and store it in project memory for future sessions.
+4. **Ask once**: If none resolve, ask the user and store in project memory.
 
-Once resolved, write all outputs under `<vault-root>/Progressive-Learning-OS/` using the folder map defined in `references/15-obsidian-organization.md`.
+Once resolved, write all outputs under `<vault-root>/<slug>/` using `references/output/obsidian-organization.md`.
 
 ### Chat output format
 
-After writing each file, respond in chat with:
-- **File name and location** (so the user can find it in Obsidian)
-- **One-line summary** of what the file contains
-- **Key insight or decision** (the single most important takeaway)
-- **Next action** if applicable
+After writing each file: file name + location, one-line summary, key insight, next action. Do NOT duplicate file content in chat.
 
-Do NOT duplicate the file's full content in chat.
+## Migrate from old layout (on request only)
 
-## 0) Organize GitHub structure first
-Use `references/16-github-repo-organization.md`.
-Set up `core/`, `domains/`, and `domains/<domain>/tracks/<track>/` before generating outputs.
+If the user asks to migrate from the old nested structure (`Progressive-Learning-OS/`, `domains/*/tracks/*/obsidian/Progressive-Learning-OS/`), run `prompts/migrate-layout.md`.
 
-## 1) Lock objective and decision gate
-Use `references/01-objective-and-gates.md`.
-Classify the study design (experimental, quasi-experimental, observational, retrospective) before proceeding. If the objective or domain description contains signals like "natural history", "observational cohort", "registry study", "no intervention", or "disease progression tracking", set study design = observational. If observational or retrospective, set execution plan mode to observational-only and auto-populate out-of-scope constraints with "No treatment, no intervention, no randomization."
-Output: one-page objective with Go/Hold/Kill, decision date, and study design classification.
+---
 
-## 2) Decompose into top risks
-Use `references/02-risk-breakdown.md`.
-Output: 3–5 risk buckets ranked by kill probability.
+## Cycle steps
 
-## 3) Build learning queue from unknowns
-Use `references/03-learn-card.md`.
-For each top risk, create a Learn Card with:
-- unknowns
-- source plan
-- teach-back summary
-- applied artifact
+### 0) Derive project slug and set up folder
 
-## 4) Gather, grade, and tier-label evidence
+From the user's objective, derive a kebab-case project slug (e.g., "Build a launch marketing strategy for my dating app" → `dating-app-launch-marketing`). Scan existing vault projects for a match before creating new.
 
-### Source reliability tier system
+Infer defaults the user didn't provide:
+- **Decision horizon**: Estimate from objective's natural timeframe. Default: 2 weeks.
+- **Today mode**: `setup` if new, `execute` if existing, `migrate` if user mentions existing notes, `publish` if execution board is mostly complete.
 
-Every factual claim must be tagged with its evidence tier at the point of use. Use these tiers consistently across all outputs (learn cards, decision packets, execution plans, publishing artifacts):
-If biomedical/scientific, use evidence-only workflow and cite PMID/DOI/URL. Also check the study design classification from step 1; if observational or retrospective, ensure evidence gathering focuses on observational methods and does not assume interventional capability.
+Create `<vault-root>/<slug>/` with numbered artifact folders. See `references/system/project-organization.md`.
 
-| Tier | Label | Examples |
-|------|-------|---------|
-| 1 | `[peer-reviewed]` | Published papers, systematic reviews, meta-analyses |
-| 2 | `[preprint]` | arXiv, bioRxiv, medRxiv -- not yet peer-reviewed |
-| 3 | `[industry-report]` | White papers, technical reports from recognized bodies |
-| 4 | `[press-release]` | Company announcements, PR wire, blog posts |
-| 5 | `[unverified / no source]` | No citation found; assumption only |
+### 1) Lock objective and decision gate
+Use `references/cycle/01-objective-and-gates.md`.
+Classify study design (experimental, quasi-experimental, observational, retrospective). If observational or retrospective, set execution to observational-only mode.
+Output: one-page objective with Go/Hold/Kill, decision date, and study design.
 
-### Mandatory inline citation with tier label
+### 2) Decompose into top risks
+Use `references/cycle/02-risk-breakdown.md`.
+Output: 3-5 risk buckets ranked by kill probability.
 
-When the skill makes a factual claim in any output (learn card, decision packet, execution plan), it must cite the source and its tier label inline. Example:
+### 3) Build learning queue from unknowns
+Use `references/cycle/03-learn-card.md`.
+For each top risk, create a Learn Card with unknowns, source plan, teach-back summary, and applied artifact.
 
-```
-AAV9 has demonstrated CNS tropism in non-human primates. [press-release -- Voyager Therapeutics, 2023; no peer-reviewed confirmation found]
-```
+### 4) Gather, grade, and tier-label evidence
+Use `references/cycle/04-evidence-tiers.md`.
+Tag every claim with its evidence tier. Apply confidence caps. Gate plan viability on source quality.
 
-Never present a tier 4-5 claim with the same confidence framing as a tier 1-2 claim. If only tier 4-5 sources exist for a claim, prefix it with "Unverified:" or "Speculative:" and include the tier label.
+### 5) Promote decision packet by version
+Use `references/cycle/05-version-promotion-rubric.md`.
+v0.1: hypothesis + risk map. v0.2: evidence gaps reduced. v0.3: execution-ready with stop rules.
 
-### Plan viability gate
+### 6) Convert decision to immediate execution
+Use `references/cycle/06-execution-board.md`.
+Verify no task is incompatible with study design. Output: day 0-7 board with owner, threshold, and stop trigger per task.
 
-Before committing to a specific technology, vector, compound, or approach in the execution plan (step 6), the skill must check:
-- Does peer-reviewed evidence (tier 1-2) support this choice?
-- If only tier 3 evidence exists, note the limitation and include a verification step in the first two days of the execution plan.
-- If only tier 4-5 evidence exists, the plan must explicitly flag the approach as **speculative** and include a verification step as the day-0 or day-1 action. The decision packet must not be promoted to v0.3 until the speculative claim is either verified or replaced.
+### 7) Weekly learning closeout
+Use `references/cycle/07-weekly-learning-review.md`.
+What's understood, what's weak, what to learn next.
 
-### Conservative confidence scoring
+### 8) Run hardcore drill-ins (in parallel)
+Use `references/cycle/08-hardcore-drillins.md`.
+1-2 deep dives per cycle. Each must change risk ranking, thresholds, or tasks.
 
-Confidence scores in learn cards must reflect source quality:
-- **Tier 1-2 sources only:** standard confidence range applies (0-100%)
-- **Tier 3 sources:** cap confidence at 60%
-- **Tier 4-5 sources only:** cap confidence at 35% and add a `> [!warning] Low evidence quality` callout explaining that the confidence is capped due to the absence of peer-reviewed or preprint-level evidence
+### 9) Publish
+Use `references/publish/publishing-pipeline.md` for milestone artifacts (LinkedIn, X/Twitter, TikTok, arXiv pathway).
+Use `references/publish/daily-content-engine.md` for daily content (objective, status, focus, learning in two layers).
 
-### Evidence workflow
+### 10) Improve
+Use `references/improve/skill-evolution-loop.md` — ship 3 skill upgrades daily, score with `references/improve/skill-upgrade-scoring-rubric.md`, log in `assets/templates/skill-evolution-log.md`.
+Use `references/improve/research-improvement-loop.md` — track KPIs daily, log in `assets/templates/daily-research-improvement-log.md`.
 
-If biomedical/scientific, use evidence-only workflow and cite PMID/DOI/URL.
-Map each source to a specific claim in the active Learn Card.
-Assign each source its tier label (1-5) and ensure the tier label appears alongside the citation in every artifact that references it.
+---
 
-## 5) Promote decision packet by version
-Use `references/04-version-promotion-rubric.md`.
-Promote only when promotion criteria are met:
-- v0.1: hypothesis and risk map complete
-- v0.2: key evidence gaps reduced
-- v0.3: execution-ready with explicit stop rules
+## Output rules
 
-## 6) Convert decision to immediate execution
-Use `references/05-day0-7-execution.md`.
-Before generating tasks, verify no proposed task requires an intervention incompatible with the study design. If study design = observational or retrospective and a task implies intervention (treatment, vector, compound, protocol manipulation, randomization), flag it with a `> [!warning] Incompatible with observational study design` callout instead of including it. Use the observational study execution template for natural history, observational, or retrospective designs.
-Output: day 0-7 board with owner, threshold, and stop trigger per task.
+These apply on **every file write**, not as separate cycle steps.
 
-## 7) Weekly learning closeout
-Use `references/06-weekly-learning-review.md`.
-Capture:
-- what is now understood
-- what remains weak/hand-wavy
-- next topic to deliberately learn
+### Obsidian organization
+Use `references/output/obsidian-organization.md`. Dated filenames, updated index links.
 
-## 8) Run hardcore drill-ins (in parallel)
-Use `references/08-hardcore-drillins.md`.
-Run 1–2 high-leverage deep dives each cycle without blocking core execution.
-Each drill-in must end with a concrete change to risk ranking, decision thresholds, or week-1 tasks.
+### Frontmatter
+Populate `updated` and `updated-sections` fields. Insert update-status callout after frontmatter. See `references/output/enriched-patterns.md`.
 
-## 9) Publish from the workstream (not beside it)
-Use `references/10-publishing-pipeline.md`.
-For each major milestone, generate:
-- one LinkedIn narrative artifact,
-- one byte-sized X/Twitter artifact,
-- one TikTok short script,
-- one arXiv-pathway note update.
+### Knowledge graph (MANDATORY)
+Use `references/output/knowledge-graph-linking.md`. Inline-link shared concepts on first mention per H2. Create hub notes under `10-Hubs/` for entities in 2+ documents.
 
-## 10) Run the daily content engine
-Use `references/11-daily-content-engine.md`.
-Every day, reiterate objective, report project status, define daily focus, and teach one learning in two layers (plain + expert).
+### Enriched rendering
+Use `references/output/visual-explainer-integration.md` and `references/output/enriched-patterns.md` when artifacts exceed complexity thresholds (3+ unknowns, 5+ tasks, 4+ risk buckets, packet promotion).
 
-## 11) Evolve the skills during execution
-Use `references/12-skill-evolution-loop.md` and log updates in `assets/templates/skill-evolution-log.md`.
-When new resources/links/patterns prove reusable, patch the skill in the same cycle.
+Visual prompts:
+- `prompts/visual-learn-card.md`
+- `prompts/visual-decision-packet.md`
+- `prompts/visual-execution-board.md`
 
-## 12) Improve research quality daily
-Use `references/14-research-improvement-loop.md` and log in `assets/templates/daily-research-improvement-log.md`.
-Track KPI trendlines, ship research-method upgrades daily, and promote methods from Trial to Standard only after repeated wins.
+### Table density gate
+For 5+ column tables, add a `> [!info] Reading this table` legend. For 3+ tables, add per-table context. If user shows confusion, fall back to narrative prose.
 
-## 13) Organize outputs in Obsidian
-Use `references/15-obsidian-organization.md`.
-Mirror each cycle’s outputs into `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/` with dated filenames and updated index links.
-
-On every file write, populate the `updated` and `updated-sections` frontmatter fields (see frontmatter convention in the organization reference). Additionally, insert an update-status callout block immediately after frontmatter in every skill-generated file to indicate what changed. Use `> [!info] Last updated: ...` when the file was modified this cycle, or `> [!note] No changes this cycle (last updated: ...)` when carried over unchanged. See `references/18-obsidian-enriched-patterns.md` for the update-status callout patterns.
-
-## 13b) Build the knowledge graph (MANDATORY)
-Use `references/19-knowledge-graph-linking.md`.
-
-**Every note must participate in a dense wikilink graph.** This is not optional — isolated notes with only bottom-of-page cross-links defeat the purpose of Obsidian.
-
-On every file write:
-1. **Inline-link shared concepts** on first mention per H2 section: tools, APIs, communities, stations, competitors, skills, and other documents. Use `[[Target|Display Text]]` alias syntax when needed.
-2. **Link in table cells** — when table rows reference hub-worthy entities (tools, stations, communities), wikilink them.
-3. **Include station flow** in cross-links if the document is part of a multi-stage workflow.
-4. **Create hub notes** for any tool, community, competitor, or concept that appears in 2+ documents. Hub notes live under `10-Hubs/{Stations,Skills,Tools,Communities,People,Competitors,Concepts}/`.
-5. **Run the linking checklist** from the reference before finalizing: stations, tools, communities, skills, competitors, cross-documents, parent link, station flow.
-
-Hub notes are short (template in reference) — they exist to accumulate backlinks and make Obsidian’s graph view useful.
-
-## 14) Render complex artifacts with Obsidian-enriched markdown
-Use `references/17-visual-explainer-integration.md` and `references/18-obsidian-enriched-patterns.md`.
-When an artifact exceeds complexity thresholds (3+ unknowns on a learn card, decision packet promotion, 5+ tasks on an execution board, 4+ risk buckets), render it using enriched Obsidian patterns (Mermaid diagrams, callout blocks, Dataview-queryable frontmatter, Chart.js trend blocks, inline HTML status indicators).
-Available visual prompts:
-- `prompts/visual-learn-card.md` -- learn cards with confidence gauges, evidence linkage diagrams, and callout-based teach-back sections
-- `prompts/visual-decision-packet.md` -- decision packets with Mermaid version timelines, risk maps, and promotion criteria checklists
-- `prompts/visual-execution-board.md` -- execution boards with KPI callouts, Mermaid timelines, and task status indicators
-Output stays in the Obsidian vault alongside the standard markdown artifacts.
-
-## 15) Calibrate complexity before presenting dense tables
-Use `references/18-obsidian-enriched-patterns.md` (Table Legend pattern).
-
-**Table density gate -- apply BEFORE rendering:**
-- **5+ columns in a single table:** Precede the table with a `> [!info] Reading this table` callout that names each column and its meaning in one sentence.
-- **3+ tables in a single output:** Introduce each table with a one-line context sentence explaining what the table maps (e.g., "This table maps enzyme names to substrate specificity and optimal pH ranges").
-- **Both conditions met:** Use both the per-table context sentence AND the column-legend callout for the densest table.
-
-**Adaptive fallback -- apply when user shows confusion:**
-- If the user asks about only a subset of columns, requests clarification on table structure, or expresses confusion about a prior structured output, default the next output to narrative prose with highlighted key terms instead of tables.
-- Re-introduce table-heavy content only after the user confirms understanding of the simplified format.
-- Track comprehension signals: questions about column meanings, requests to "explain the table," or engagement with fewer than half the presented columns indicate the density exceeded the user's current comfort level.
+---
 
 ## Rules
-- **Never output research, analysis, or intelligence as chat-only. Every substantive output must be written as an Obsidian file first. Chat gets a summary.**
-- Never keep claims unlinked to evidence in evidence-required domains.
-- Never present tier 4-5 claims (press releases, unverified) with the same confidence framing as tier 1-2 claims (peer-reviewed, preprints). Always disclose source quality proactively.
-- Never build an execution plan on tier 4-5 evidence without flagging the approach as speculative and including a verification step as a day-0 or day-1 action.
-- Never block objective-critical execution waiting for perfect understanding; ship with explicit uncertainty + falsification next step.
+- Never output research as chat-only. File first, chat gets summary.
+- Never present tier 4-5 claims with tier 1-2 confidence framing.
+- Never build execution on tier 4-5 evidence without flagging as speculative.
+- Never block execution waiting for perfect understanding — ship with explicit uncertainty.
 - Prefer one strong completed loop over many partial loops.
-- Keep each artifact skimmable (target one page, bullets first).
-- Include “what changed and why” on every version promotion.
-- Every factual claim in an output artifact must carry an inline tier label (see step 4 tier table).
+- Keep each artifact skimmable (one page, bullets first).
+- Include "what changed and why" on every version promotion.
+- Every factual claim must carry an inline tier label.
 
 ## Output bundle (minimum)
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/01-Objective/YYYY-MM-DD-objective-and-gates.md`
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/02-Risks/YYYY-MM-DD-risk-breakdown.md`
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/03-Learn-Cards/YYYY-MM-DD-<topic>.md`
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/04-Research/YYYY-MM-DD-decision-packet-v0.x.md`
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/05-Execution/YYYY-MM-DD-day0-7-execution.md`
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/06-Publishing/YYYY-MM-DD-daily-publishing-bundle.md`
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/07-Skill-Evolution/YYYY-MM-DD-skill-evolution-log.md`
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/08-Research-Improvement/YYYY-MM-DD-research-improvement-log.md`
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/00-Index/current-cycle.md`
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/10-Hubs/**/*.md` (hub notes for entities referenced in 2+ documents — see `references/19-knowledge-graph-linking.md`)
+- `<slug>/00-Index/current-cycle.md`
+- `<slug>/01-Objective/YYYY-MM-DD-objective-and-gates.md`
+- `<slug>/02-Risks/YYYY-MM-DD-risk-breakdown.md`
+- `<slug>/03-Learn-Cards/YYYY-MM-DD-<topic>.md`
+- `<slug>/04-Research/YYYY-MM-DD-decision-packet-v0.x.md`
+- `<slug>/05-Execution/YYYY-MM-DD-day0-7-execution.md`
+- `<slug>/06-Publishing/YYYY-MM-DD-daily-publishing-bundle.md`
+- `<slug>/07-Skill-Evolution/YYYY-MM-DD-skill-evolution-log.md`
+- `<slug>/08-Research-Improvement/YYYY-MM-DD-research-improvement-log.md`
+- `<slug>/10-Hubs/**/*.md`
