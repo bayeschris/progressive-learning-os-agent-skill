@@ -8,9 +8,7 @@ description: Run a tri-track system that advances objective execution while comp
 Execute this sequence every cycle. Keep artifacts short, explicit, and versioned.
 Run `references/system/tri-track-operating-system.md` continuously so execution speed is never gated by learning speed and publishing stays coupled to real work.
 
-## 0) Organize project structure first
-Use `references/16-github-repo-organization.md`.
-Set up `<project>/` folder in Obsidian vault with `Dashboard.md`, `Research/`, `Learning/`, `Publishing/`, `Process/`, and `project-config.yaml`. If the project has multiple modalities, create subfolders under `Research/` and `Learning/`.
+## File-first output rule (MANDATORY)
 
 **Every substantive output MUST be written as a dated file in the Obsidian vault. Chat gets a brief summary (3-5 sentences) pointing the user to the file.**
 
@@ -30,7 +28,7 @@ After writing each file: file name + location, one-line summary, key insight, ne
 
 ## Migrate from old layout (on request only)
 
-If the user asks to migrate from the old nested structure (`Progressive-Learning-OS/`, `domains/*/tracks/*/obsidian/Progressive-Learning-OS/`), run `prompts/migrate-layout.md`.
+If the user asks to migrate from the old nested structure (`Progressive-Learning-OS/`, `domains/*/tracks/*/obsidian/Progressive-Learning-OS/`, or numbered folders like `00-Index/`, `01-Objective/`), run `prompts/migrate-layout.md`.
 
 ---
 
@@ -40,11 +38,11 @@ If the user asks to migrate from the old nested structure (`Progressive-Learning
 
 From the user's objective, derive a kebab-case project slug (e.g., "Build a launch marketing strategy for my dating app" → `dating-app-launch-marketing`). Scan existing vault projects for a match before creating new.
 
-## 13) Organize outputs in Obsidian
-Use `references/15-obsidian-organization.md`.
-File each cycle’s outputs into the 4-category structure (`Research/`, `Learning/`, `Publishing/`, `Process/`) with dated filenames. Update `Dashboard.md` — specifically, refresh the `> Next:` blockquote in each of the 4 sections to reflect the single concrete next action for that category.
+Infer defaults the user didn't provide:
+- **Decision horizon**: Estimate from objective's natural timeframe. Default: 2 weeks.
+- **Today mode**: `setup` if new, `execute` if existing, `migrate` if user mentions existing notes, `publish` if execution board is mostly complete.
 
-Create `<vault-root>/<slug>/` with numbered artifact folders. See `references/system/project-organization.md`.
+Create `<vault-root>/<slug>/` with `Dashboard.md`, `Research/`, `Learning/`, `Publishing/`, `Process/`, and `project-config.yaml`. If the project has multiple modalities, create subfolders under `Research/` and `Learning/`. See `references/system/project-organization.md`.
 
 ### 1) Lock objective and decision gate
 Use `references/cycle/01-objective-and-gates.md`.
@@ -94,7 +92,7 @@ Use `references/improve/research-improvement-loop.md` — track KPIs daily, log 
 These apply on **every file write**, not as separate cycle steps.
 
 ### Obsidian organization
-Use `references/output/obsidian-organization.md`. Dated filenames, updated index links.
+Use `references/output/obsidian-organization.md`. File into 4-category structure (`Research/`, `Learning/`, `Publishing/`, `Process/`) with dated filenames. Update `Dashboard.md` — refresh the `> Next:` blockquote in each section to reflect the single concrete next action for that category.
 
 ### Frontmatter
 Populate `updated` and `updated-sections` fields. Insert update-status callout after frontmatter. See `references/output/enriched-patterns.md`.
@@ -126,15 +124,16 @@ For 5+ column tables, add a `> [!info] Reading this table` legend. For 3+ tables
 - Every factual claim must carry an inline tier label.
 
 ## Output bundle (minimum)
-- `<project>/Dashboard.md`
-- `<project>/Research/YYYY-MM-DD-objective-and-gates.md`
-- `<project>/Research/YYYY-MM-DD-risk-breakdown.md`
-- `<project>/Research/<Modality>/YYYY-MM-DD-decision-packet-v0.x.md`
-- `<project>/Research/<Modality>/YYYY-MM-DD-day0-7-execution.md`
-- `<project>/Learning/YYYY-MM-DD-<topic>.md`
-- `<project>/Publishing/YYYY-MM-DD-daily-publishing-bundle.md`
-- `<project>/Process/YYYY-MM-DD-skill-evolution-log.md`
-- `<project>/Process/YYYY-MM-DD-research-improvement-log.md`
-- `<project>/project-config.yaml`
+- `<slug>/Dashboard.md`
+- `<slug>/Research/YYYY-MM-DD-objective-and-gates.md`
+- `<slug>/Research/YYYY-MM-DD-risk-breakdown.md`
+- `<slug>/Research/<Modality>/YYYY-MM-DD-decision-packet-v0.x.md`
+- `<slug>/Research/<Modality>/YYYY-MM-DD-day0-7-execution.md`
+- `<slug>/Learning/YYYY-MM-DD-<topic>.md`
+- `<slug>/Publishing/YYYY-MM-DD-daily-publishing-bundle.md`
+- `<slug>/Process/YYYY-MM-DD-skill-evolution-log.md`
+- `<slug>/Process/YYYY-MM-DD-research-improvement-log.md`
+- `<slug>/10-Hubs/**/*.md`
+- `<slug>/project-config.yaml`
 
 For single-modality projects, omit `<Modality>/` subfolders — files go directly in `Research/` and `Learning/`.

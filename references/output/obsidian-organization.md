@@ -3,36 +3,52 @@
 Store all run outputs under:
 `<vault>/<slug>/`
 
-## Folder map
-- `00-Index/` -- navigation notes and current cycle links
-- `01-Objective/` -- objective + gates snapshots
-- `02-Risks/` -- ranked risk maps
-- `03-Learn-Cards/` -- topic learn cards
-- `04-Research/` -- evidence maps, decision packets, drill-ins
-- `05-Execution/` -- day 0-7 boards, checkpoints
-- `06-Publishing/` -- LinkedIn/X/TikTok drafts + arXiv pathway notes
-- `07-Skill-Evolution/` -- skill upgrade logs + rubric scores
-- `08-Research-Improvement/` -- daily KPI logs and post-mortems
-- `10-Hubs/` -- knowledge graph hub notes (see `references/output/knowledge-graph-linking.md`)
-  - `Stations/` -- workflow stage hubs (e.g., `Station 1 - LISTEN.md`)
-  - `Skills/` -- Claude Code skill hubs
-  - `Tools/` -- external tool/API hubs (e.g., `PRAW.md`, `App Store Connect API.md`)
-  - `Communities/` -- online communities, groups, podcasts, channels
-  - `People/` -- key contacts, influencers
-  - `Competitors/` -- competitor product hubs
-  - `Concepts/` -- recurring strategic concepts
+## Folder map — 4 categories
+
+```
+<slug>/
+├── Dashboard.md              ← single entry point: status, blockers, per-category next steps
+├── Research/                 ← decisions, evidence, execution plans
+│   ├── Shared/               ← objective, risks, cross-cutting deep dives (multi-modality only)
+│   └── <Modality>/           ← one subfolder per modality (e.g., Small Molecule/, AAV/)
+├── Learning/                 ← learn cards (one per unknown being closed)
+│   └── <Modality>/           ← optional: only when >1 modality exists
+├── Publishing/               ← LinkedIn/X/TikTok drafts + arXiv pathway notes
+├── Process/                  ← skill evolution logs, research improvement KPIs
+└── 10-Hubs/                  ← knowledge graph hub notes (see references/output/knowledge-graph-linking.md)
+    ├── Stations/
+    ├── Skills/
+    ├── Tools/
+    ├── Communities/
+    ├── People/
+    ├── Competitors/
+    └── Concepts/
+```
+
+### When to create modality subfolders
+- **Single-track project:** no subfolders — files go directly in `Research/` and `Learning/`
+- **Multi-track project:** create one subfolder per modality + `Shared/` for cross-cutting artifacts
+
+### What goes where
+
+| Category | Artifacts | Skill steps |
+|----------|-----------|-------------|
+| **Research** | Objective & gates, risk breakdown, decision packets, deep dives, execution boards | 1-2, 5-6, 8 |
+| **Learning** | Learn cards (each tracks one unknown being closed with evidence) | 3-4 |
+| **Publishing** | Daily content bundles, LinkedIn/X/TikTok drafts, arXiv notes | 9 |
+| **Process** | Skill evolution logs, research improvement KPI logs | 10 |
+| **Dashboard** | Weekly review summary, status update | 7 |
 
 ## Naming rules
-- Use date prefix: `YYYY-MM-DD-<slug>.md`
+- Date prefix: `YYYY-MM-DD-<slug>.md`
 - Versioned docs: append `-v0.x` (e.g., `2026-02-22-decision-packet-v0.3.md`)
-- Keep one canonical latest link in `00-Index/current-cycle.md`
+- Dashboard is always `Dashboard.md` (no date prefix — it's the living entry point)
 
 ## Daily filing checklist
-1. Save today's Objective/Status/Focus note.
-2. File any new learn cards under `03-Learn-Cards/`.
-3. File decision/research deltas under `04-Research/`.
-4. File publish drafts under `06-Publishing/`.
-5. Update index links in `00-Index/current-cycle.md`.
+1. Update `Dashboard.md` — refresh the `> Next:` blockquote in each of the 4 sections.
+2. File learn cards under `Learning/` (or `Learning/<Modality>/`).
+3. File decision packets and deep dives under `Research/`.
+4. File publish drafts under `Publishing/`.
 
 ## Cross-link rule
 Every note should include:
@@ -43,6 +59,59 @@ Every note should include:
 Use `[[wikilinks]]` consistently so Obsidian's graph view and backlink panels work.
 
 **Beyond bottom-of-page cross-links**, apply inline wikilinks throughout body text per `references/output/knowledge-graph-linking.md`. Link tools, APIs, communities, stations, competitors, and sibling documents on first mention per H2 section. Create hub notes under `10-Hubs/` for entities referenced in 2+ documents.
+
+## Dashboard template
+
+The Dashboard opens with the objective, status, and blockers. Then each of the 4 sections has:
+1. A **`> Next:`** blockquote stating the single next action for that category
+2. Links to all artifacts in that category
+
+Every time the Dashboard is updated, each `> Next:` must be refreshed to reflect current state.
+
+### How to derive each "Next"
+
+| Category | Ask yourself | Example |
+|----------|-------------|---------|
+| **Research** | What's the next decision to make or evidence gap blocking a decision? | "Close SM blocker X to promote decision packet v0.2 → v0.3" |
+| **Learning** | Which learn card has the lowest confidence relative to its target? What specific query/experiment closes the gap? | "Run 4 PubMed queries from TE biomarker card, grade against minimum bar" |
+| **Publishing** | What's the most recent insight that hasn't been packaged yet? | "Write daily bundle from AAV DIMMER circuit finding" |
+| **Process** | What research method is on trial, or what worked last cycle that should be promoted/dropped? | "Evaluate structured counter-evidence search — 2 more wins needed for Standard" |
+
+### Rules for "Next" lines
+- Each "Next" must be a **concrete action**, not a status description ("investigate X" is bad; "run PubMed query Y and grade against bar Z" is good)
+- If a category has no pending action, write `> Next: None — current cycle complete. Will resume next cycle.`
+- The Dashboard is updated at minimum once per cycle, and always after completing a next action
+
+### Dashboard Dataview queries
+
+Include live Dataview queries in the Dashboard for each category:
+
+````markdown
+## Learning
+```dataview
+TABLE confidence, status, risk-bucket
+FROM "<slug>/Learning"
+WHERE type = "learn-card"
+SORT confidence ASC
+```
+
+## Research
+```dataview
+TABLE version, gate, decision-date
+FROM "<slug>/Research"
+WHERE type = "decision-packet"
+SORT decision-date DESC
+LIMIT 5
+```
+
+## Changed Today
+```dataview
+TABLE updated-sections, updated
+FROM "<slug>"
+WHERE updated = date(today)
+SORT file.folder ASC
+```
+````
 
 ## Frontmatter convention
 
@@ -78,7 +147,7 @@ Full frontmatter schemas for each artifact type are defined in `references/outpu
 
 | Plugin | Why |
 |--------|-----|
-| **Dataview** | Query frontmatter across all notes; build live dashboards in index notes |
+| **Dataview** | Query frontmatter across all notes; build live dashboards |
 | **Charts** | Render Chart.js blocks for KPI trends in research improvement logs |
 | **Kanban** | Convert execution board task lists into visual kanban boards |
 | **Templater** | Insert templates with dynamic date substitution |
@@ -94,47 +163,6 @@ Key conventions:
 - Use Mermaid fenced blocks for diagrams (rendered by Obsidian core, no plugin needed)
 - Use `<progress>` and `<span>` for inline status indicators
 - Use Dataview inline fields (`field:: value`) when a value should be queryable but not in frontmatter
-
-## Index note with Dataview queries
-
-`00-Index/current-cycle.md` should include live Dataview queries instead of manually maintained link lists:
-
-````markdown
-## Active Learn Cards
-```dataview
-TABLE confidence, status, risk-bucket
-FROM "<slug>/03-Learn-Cards"
-WHERE type = "learn-card"
-SORT date DESC
-LIMIT 10
-```
-
-## Decision Packets
-```dataview
-TABLE version, gate, decision-date
-FROM "<slug>/04-Research"
-WHERE type = "decision-packet"
-SORT decision-date DESC
-LIMIT 5
-```
-
-## Recent Execution Boards
-```dataview
-TABLE total-tasks, completed, blocked, days-remaining
-FROM "<slug>/05-Execution"
-WHERE type = "execution-board"
-SORT date-range DESC
-LIMIT 3
-```
-
-## Changed Today
-```dataview
-TABLE updated-sections, updated
-FROM "<slug>"
-WHERE updated = date(today)
-SORT file.folder ASC
-```
-````
 
 ## Optional: CSS snippet for callout theming
 
