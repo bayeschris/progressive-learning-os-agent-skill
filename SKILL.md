@@ -8,9 +8,9 @@ description: Run a tri-track system that advances objective execution while comp
 Execute this sequence every cycle. Keep artifacts short, explicit, and versioned.
 Run `references/09-tri-track-operating-system.md` continuously so execution speed is never gated by learning speed and publishing stays coupled to real work.
 
-## 0) Organize GitHub structure first
+## 0) Organize project structure first
 Use `references/16-github-repo-organization.md`.
-Set up `core/`, `domains/`, and `domains/<domain>/tracks/<track>/` before generating outputs.
+Set up `<project>/` folder in Obsidian vault with `Dashboard.md`, `Research/`, `Learning/`, `Publishing/`, `Process/`, and `project-config.yaml`. If the project has multiple modalities, create subfolders under `Research/` and `Learning/`.
 
 ## 1) Lock objective and decision gate
 Use `references/01-objective-and-gates.md`.
@@ -77,7 +77,7 @@ Track KPI trendlines, ship research-method upgrades daily, and promote methods f
 
 ## 13) Organize outputs in Obsidian
 Use `references/15-obsidian-organization.md`.
-Mirror each cycle’s outputs into `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/` with dated filenames and updated index links.
+File each cycle’s outputs into the 4-category structure (`Research/`, `Learning/`, `Publishing/`, `Process/`) with dated filenames. Update `Dashboard.md` — specifically, refresh the `> Next:` blockquote in each of the 4 sections to reflect the single concrete next action for that category.
 
 ## 14) Render complex artifacts visually (optional)
 Use `references/17-visual-explainer-integration.md`.
@@ -96,12 +96,15 @@ Output goes to `~/.agent/diagrams/` and opens in the browser. The markdown versi
 - Include “what changed and why” on every version promotion.
 
 ## Output bundle (minimum)
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/01-Objective/YYYY-MM-DD-objective-and-gates.md`
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/02-Risks/YYYY-MM-DD-risk-breakdown.md`
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/03-Learn-Cards/YYYY-MM-DD-<topic>.md`
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/04-Research/YYYY-MM-DD-decision-packet-v0.x.md`
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/05-Execution/YYYY-MM-DD-day0-7-execution.md`
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/06-Publishing/YYYY-MM-DD-daily-publishing-bundle.md`
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/07-Skill-Evolution/YYYY-MM-DD-skill-evolution-log.md`
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/08-Research-Improvement/YYYY-MM-DD-research-improvement-log.md`
-- `domains/<domain>/tracks/<track>/obsidian/Progressive-Learning-OS/00-Index/current-cycle.md`
+- `<project>/Dashboard.md`
+- `<project>/Research/YYYY-MM-DD-objective-and-gates.md`
+- `<project>/Research/YYYY-MM-DD-risk-breakdown.md`
+- `<project>/Research/<Modality>/YYYY-MM-DD-decision-packet-v0.x.md`
+- `<project>/Research/<Modality>/YYYY-MM-DD-day0-7-execution.md`
+- `<project>/Learning/YYYY-MM-DD-<topic>.md`
+- `<project>/Publishing/YYYY-MM-DD-daily-publishing-bundle.md`
+- `<project>/Process/YYYY-MM-DD-skill-evolution-log.md`
+- `<project>/Process/YYYY-MM-DD-research-improvement-log.md`
+- `<project>/project-config.yaml`
+
+For single-modality projects, omit `<Modality>/` subfolders — files go directly in `Research/` and `Learning/`.
