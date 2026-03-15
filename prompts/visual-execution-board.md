@@ -68,6 +68,6 @@ Generate an Obsidian-enriched markdown execution board using patterns from `refe
 - Sections 4-6 are the operational core (Mermaid diagrams + task cards)
 - Sections 7-9 are supporting context (checkpoint callouts + blockers)
 
-Write to the Obsidian vault path: `<vault>/<slug>/05-Execution/YYYY-MM-DD-execution-board.md`
+Write to the Obsidian vault path: `<vault>/<slug>/research/YYYY-MM-DD-execution-board.md`
 
 $@

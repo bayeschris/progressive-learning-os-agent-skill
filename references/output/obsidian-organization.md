@@ -7,48 +7,50 @@ Store all run outputs under:
 
 ```
 <slug>/
-├── Dashboard.md              ← single entry point: status, blockers, per-category next steps
-├── Research/                 ← decisions, evidence, execution plans
-│   ├── Shared/               ← objective, risks, cross-cutting deep dives (multi-modality only)
-│   └── <Modality>/           ← one subfolder per modality (e.g., Small Molecule/, AAV/)
-├── Learning/                 ← learn cards (one per unknown being closed)
-│   └── <Modality>/           ← optional: only when >1 modality exists
-├── Publishing/               ← LinkedIn/X/TikTok drafts + arXiv pathway notes
-├── Process/                  ← skill evolution logs, research improvement KPIs
-└── 10-Hubs/                  ← knowledge graph hub notes (see references/output/knowledge-graph-linking.md)
-    ├── Stations/
-    ├── Skills/
-    ├── Tools/
-    ├── Communities/
-    ├── People/
-    ├── Competitors/
-    └── Concepts/
+├── dashboard.md              ← single entry point: status, blockers, per-category next steps
+├── research/                 ← decisions, evidence, execution plans
+│   ├── shared/               ← objective, risks, cross-cutting deep dives (multi-modality only)
+│   └── <modality>/           ← one subfolder per modality (e.g., small-molecule/, aav/)
+├── learning/                 ← learn cards (one per unknown being closed)
+│   └── <modality>/           ← optional: only when >1 modality exists
+├── publishing/               ← LinkedIn/X/TikTok drafts + arXiv pathway notes
+├── process/                  ← skill evolution logs, research improvement KPIs
+└── hubs/                     ← knowledge graph hub notes (see references/output/knowledge-graph-linking.md)
+    ├── stations/
+    ├── skills/
+    ├── tools/
+    ├── communities/
+    ├── people/
+    ├── competitors/
+    └── concepts/
 ```
 
 ### When to create modality subfolders
-- **Single-track project:** no subfolders — files go directly in `Research/` and `Learning/`
-- **Multi-track project:** create one subfolder per modality + `Shared/` for cross-cutting artifacts
+- **Single-track project:** no subfolders — files go directly in `research/` and `learning/`
+- **Multi-track project:** create one subfolder per modality + `shared/` for cross-cutting artifacts
 
 ### What goes where
 
 | Category | Artifacts | Skill steps |
 |----------|-----------|-------------|
-| **Research** | Objective & gates, risk breakdown, decision packets, deep dives, execution boards | 1-2, 5-6, 8 |
-| **Learning** | Learn cards (each tracks one unknown being closed with evidence) | 3-4 |
-| **Publishing** | Daily content bundles, LinkedIn/X/TikTok drafts, arXiv notes | 9 |
-| **Process** | Skill evolution logs, research improvement KPI logs | 10 |
-| **Dashboard** | Weekly review summary, status update | 7 |
+| **research** | Objective & gates, risk breakdown, decision packets, deep dives, execution boards | 1-2, 5-6, 8 |
+| **learning** | Learn cards (each tracks one unknown being closed with evidence) | 3-4 |
+| **publishing** | Daily content bundles, LinkedIn/X/TikTok drafts, arXiv notes | 9 |
+| **process** | Skill evolution logs, research improvement KPI logs | 10 |
+| **dashboard** | Weekly review summary, status update | 7 |
 
 ## Naming rules
+- **All lowercase, no spaces, alphanumeric + hyphens only.** Every directory and filename must match `[a-z0-9-]+` (plus `.md`/`.yaml` extension). Convert spaces to hyphens, strip special characters, lowercase everything.
 - Date prefix: `YYYY-MM-DD-<slug>.md`
 - Versioned docs: append `-v0.x` (e.g., `2026-02-22-decision-packet-v0.3.md`)
-- Dashboard is always `Dashboard.md` (no date prefix — it's the living entry point)
+- Dashboard is always `dashboard.md` (no date prefix — it's the living entry point)
+- Modality subfolders use kebab-case (e.g., `small-molecule/`, not `Small Molecule/`)
 
 ## Daily filing checklist
-1. Update `Dashboard.md` — refresh the `> Next:` blockquote in each of the 4 sections.
-2. File learn cards under `Learning/` (or `Learning/<Modality>/`).
-3. File decision packets and deep dives under `Research/`.
-4. File publish drafts under `Publishing/`.
+1. Update `dashboard.md` — refresh the `> Next:` blockquote in each of the 4 sections.
+2. File learn cards under `learning/` (or `learning/<modality>/`).
+3. File decision packets and deep dives under `research/`.
+4. File publish drafts under `publishing/`.
 
 ## Cross-link rule
 Every note should include:
@@ -58,15 +60,15 @@ Every note should include:
 
 Use `[[wikilinks]]` consistently so Obsidian's graph view and backlink panels work.
 
-**Beyond bottom-of-page cross-links**, apply inline wikilinks throughout body text per `references/output/knowledge-graph-linking.md`. Link tools, APIs, communities, stations, competitors, and sibling documents on first mention per H2 section. Create hub notes under `10-Hubs/` for entities referenced in 2+ documents.
+**Beyond bottom-of-page cross-links**, apply inline wikilinks throughout body text per `references/output/knowledge-graph-linking.md`. Link tools, APIs, communities, stations, competitors, and sibling documents on first mention per H2 section. Create hub notes under `hubs/` for entities referenced in 2+ documents.
 
-## Dashboard template
+## dashboard.md template
 
-The Dashboard opens with the objective, status, and blockers. Then each of the 4 sections has:
+The dashboard opens with the objective, status, and blockers. Then each of the 4 sections has:
 1. A **`> Next:`** blockquote stating the single next action for that category
 2. Links to all artifacts in that category
 
-Every time the Dashboard is updated, each `> Next:` must be refreshed to reflect current state.
+Every time `dashboard.md` is updated, each `> Next:` must be refreshed to reflect current state.
 
 ### How to derive each "Next"
 
@@ -80,25 +82,25 @@ Every time the Dashboard is updated, each `> Next:` must be refreshed to reflect
 ### Rules for "Next" lines
 - Each "Next" must be a **concrete action**, not a status description ("investigate X" is bad; "run PubMed query Y and grade against bar Z" is good)
 - If a category has no pending action, write `> Next: None — current cycle complete. Will resume next cycle.`
-- The Dashboard is updated at minimum once per cycle, and always after completing a next action
+- `dashboard.md` is updated at minimum once per cycle, and always after completing a next action
 
 ### Dashboard Dataview queries
 
-Include live Dataview queries in the Dashboard for each category:
+Include live Dataview queries in `dashboard.md` for each category:
 
 ````markdown
-## Learning
+## learning
 ```dataview
 TABLE confidence, status, risk-bucket
-FROM "<slug>/Learning"
+FROM "<slug>/learning"
 WHERE type = "learn-card"
 SORT confidence ASC
 ```
 
-## Research
+## research
 ```dataview
 TABLE version, gate, decision-date
-FROM "<slug>/Research"
+FROM "<slug>/research"
 WHERE type = "decision-packet"
 SORT decision-date DESC
 LIMIT 5

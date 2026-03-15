@@ -59,6 +59,6 @@ Generate an Obsidian-enriched markdown decision packet using patterns from `refe
 - Sections 4-5 are evidence and reasoning (Mermaid diagram + table)
 - Sections 6-8 are actionable outputs (checklists + callouts)
 
-Write to the Obsidian vault path: `<vault>/<slug>/04-Research/YYYY-MM-DD-decision-packet-v0.x.md`
+Write to the Obsidian vault path: `<vault>/<slug>/research/YYYY-MM-DD-decision-packet-v0.x.md`
 
 $@

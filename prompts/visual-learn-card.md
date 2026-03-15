@@ -73,6 +73,6 @@ Generate an Obsidian-enriched markdown learn card using patterns from `reference
 - Sections 3-5 are supporting detail (question/example callouts + Mermaid diagram)
 - Sections 7-8 are reference (tip/info callouts + progress bar)
 
-Write to the Obsidian vault path: `<vault>/<slug>/03-Learn-Cards/YYYY-MM-DD-<topic-slug>.md`
+Write to the Obsidian vault path: `<vault>/<slug>/learning/YYYY-MM-DD-<topic-slug>.md`
 
 $@

@@ -19,7 +19,7 @@ That's it. The system will:
 1. **Derive a project slug** from your objective (e.g., `dating-app-launch-marketing`)
 2. **Infer the decision horizon** from the objective's natural timeframe
 3. **Detect today mode** — `setup` for new projects, `execute` for existing ones, `migrate` if you mention existing notes
-4. **Create the folder** at `<vault>/<slug>/01-Objective/`, `02-Risks/`, etc.
+4. **Create the folder** at `<vault>/<slug>/` with `research/`, `learning/`, `publishing/`, `process/`
 
 If you don't like the derived slug, just say so and it'll rename.
 
@@ -119,32 +119,29 @@ Each project is a folder in your Obsidian vault:
 ```text
 <vault>/
   dating-app-launch-marketing/
-    00-Index/
-    01-Objective/
-    02-Risks/
-    03-Learn-Cards/
-    04-Research/
-    05-Execution/
-    06-Publishing/
-    07-Skill-Evolution/
-    08-Research-Improvement/
-    10-Hubs/
+    dashboard.md
+    research/
+    learning/
+    publishing/
+    process/
+    hubs/
+    project-config.yaml
   cmt1b-gene-therapy-viability/
-    00-Index/
-    01-Objective/
+    dashboard.md
+    research/
     ...
 ```
 
-The slug is auto-derived from your objective. The numbered folders are created automatically.
+The slug is auto-derived from your objective. All directories and filenames are lowercase, no spaces, alphanumeric + hyphens only.
 
 ---
 
 ## Current location of the skill in this workspace
 
-- Main skill: `skills/progressive-learning-os-agent-skill/SKILL.md`
-- References: `skills/progressive-learning-os-agent-skill/references/`
-- Template assets: `skills/progressive-learning-os-agent-skill/assets/templates/`
-- Obsidian starter index: `<vault>/<slug>/00-Index/current-cycle.md`
+- Main skill: `SKILL.md`
+- References: `references/`
+- Template assets: `assets/templates/`
+- Obsidian entry point: `<vault>/<slug>/dashboard.md`
 
 ---
 
@@ -244,28 +241,28 @@ Outputs are written under:
 
 - `<vault>/<slug>/`
 
-Use dated filenames (`YYYY-MM-DD-...`) and keep `00-Index/current-cycle.md` updated with canonical links.
+Use dated filenames (`YYYY-MM-DD-...`) and keep `dashboard.md` updated with canonical links.
 
-### Recommended Obsidian folders
+### Obsidian folders
 
-- `00-Index/` — current-cycle dashboard and canonical links
-- `01-Objective/` — objective + gates snapshots
-- `02-Risks/` — ranked risk maps
-- `03-Learn-Cards/` — learning cards
-- `04-Research/` — decision packets, evidence maps, drill-ins
-- `05-Execution/` — day 0-7 board + checkpoints
-- `06-Publishing/` — LinkedIn/X/TikTok/arXiv-pathway artifacts
-- `07-Skill-Evolution/` — daily skill-upgrade logs + scores
-- `08-Research-Improvement/` — KPI logs + post-mortems
+- `research/` — objective, risks, decision packets, evidence maps, drill-ins, execution boards
+- `learning/` — learn cards (one per unknown being closed)
+- `publishing/` — LinkedIn/X/TikTok/arXiv-pathway artifacts
+- `process/` — skill evolution logs, research improvement KPI logs
+- `hubs/` — knowledge graph hub notes (stations, tools, communities, etc.)
+
+### Naming standard
+
+All directories and filenames must be **lowercase, no spaces, alphanumeric + hyphens only** (`[a-z0-9-]+.md`).
 
 ### How to work from Obsidian each day
 
-1. Open `00-Index/current-cycle.md` first.
+1. Open `dashboard.md` first.
 2. Fill: Objective, Status, Focus, Learning (plain/expert).
-3. Update links to latest notes from folders `01`-`08`.
-4. Add today's execution board movement in `05-Execution/`.
-5. Add publishing bundle in `06-Publishing/`.
-6. Close day with skill/research logs in `07` and `08`.
+3. Update links to latest notes.
+4. Add today's execution board movement in `research/`.
+5. Add publishing bundle in `publishing/`.
+6. Close day with skill/research logs in `process/`.
 
 ---
 
@@ -273,7 +270,7 @@ Use dated filenames (`YYYY-MM-DD-...`) and keep `00-Index/current-cycle.md` upda
 
 The skill tracks tasks through a **Day 0-7 execution board** plus risk-linked tasks:
 
-- Primary task file: `05-Execution/YYYY-MM-DD-day0-7-execution.md`
+- Primary task file: `research/YYYY-MM-DD-day0-7-execution.md`
 - Each task must include:
   - owner
   - success threshold
@@ -325,8 +322,8 @@ Convert existing material into a structured project under this system, then resu
    - Mark gaps explicitly as `missing` instead of hand-waving.
 
 5. **Normalize into Obsidian layout**
-   - Place files in `<slug>/01..08` folders.
-   - Update `00-Index/current-cycle.md` with canonical links.
+   - Place files in `<slug>/research/`, `learning/`, `publishing/`, `process/`.
+   - Update `dashboard.md` with canonical links.
 
 6. **Set "resume point" explicitly**
    - Add a short note: "Where we left off" containing:

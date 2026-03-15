@@ -14,11 +14,13 @@ Run `references/system/tri-track-operating-system.md` continuously so execution 
 
 ### Vault path resolution
 
-Resolve the Obsidian vault path in this order:
-1. **Explicit argument**: If the user passes `obsidian <vault-name>`, search `~/Documents/Obsidian/` for a matching vault.
-2. **Working directory detection**: If the current working directory or any parent contains `.obsidian/`, use that as vault root.
-3. **Project memory**: Check project memory files for a previously stored vault path.
-4. **Ask once**: If none resolve, ask the user and store in project memory.
+**CRITICAL: Do NOT use `find`, `ls -R`, or any filesystem scanning command. Do NOT spawn an Explore agent. Just read the specific files listed below in order. STOP at the first match.**
+
+1. **Explicit argument**: If the user passed `obsidian <vault-name>`, use `~/Documents/Obsidian/<vault-name>/`.
+2. **Repo-level config**: Read `project-config.yaml` in the working directory. If it has a `vault` key, use that path. STOP.
+3. **Project memory**: Read project memory files for a stored vault path. If found, use it. STOP.
+4. **Working directory**: Check if the working directory itself contains `.obsidian/`. STOP.
+5. **Ask once**: Ask the user for the vault path. Store in project memory.
 
 Once resolved, write all outputs under `<vault-root>/<slug>/` using `references/output/obsidian-organization.md`.
 
@@ -42,7 +44,7 @@ Infer defaults the user didn't provide:
 - **Decision horizon**: Estimate from objective's natural timeframe. Default: 2 weeks.
 - **Today mode**: `setup` if new, `execute` if existing, `migrate` if user mentions existing notes, `publish` if execution board is mostly complete.
 
-Create `<vault-root>/<slug>/` with `Dashboard.md`, `Research/`, `Learning/`, `Publishing/`, `Process/`, and `project-config.yaml`. If the project has multiple modalities, create subfolders under `Research/` and `Learning/`. See `references/system/project-organization.md`.
+Create `<vault-root>/<slug>/` with `dashboard.md`, `research/`, `learning/`, `publishing/`, `process/`, and `project-config.yaml`. If the project has multiple modalities, create subfolders under `research/` and `learning/`. See `references/system/project-organization.md`.
 
 ### 1) Lock objective and decision gate
 Use `references/cycle/01-objective-and-gates.md`.
@@ -92,13 +94,13 @@ Use `references/improve/research-improvement-loop.md` — track KPIs daily, log 
 These apply on **every file write**, not as separate cycle steps.
 
 ### Obsidian organization
-Use `references/output/obsidian-organization.md`. File into 4-category structure (`Research/`, `Learning/`, `Publishing/`, `Process/`) with dated filenames. Update `Dashboard.md` — refresh the `> Next:` blockquote in each section to reflect the single concrete next action for that category.
+Use `references/output/obsidian-organization.md`. File into 4-category structure (`research/`, `learning/`, `publishing/`, `process/`) with dated filenames. Update `dashboard.md` — refresh the `> Next:` blockquote in each section to reflect the single concrete next action for that category.
 
 ### Frontmatter
 Populate `updated` and `updated-sections` fields. Insert update-status callout after frontmatter. See `references/output/enriched-patterns.md`.
 
 ### Knowledge graph (MANDATORY)
-Use `references/output/knowledge-graph-linking.md`. Inline-link shared concepts on first mention per H2. Create hub notes under `10-Hubs/` for entities in 2+ documents.
+Use `references/output/knowledge-graph-linking.md`. Inline-link shared concepts on first mention per H2. Create hub notes under `hubs/` for entities in 2+ documents.
 
 ### Enriched rendering
 Use `references/output/visual-explainer-integration.md` and `references/output/enriched-patterns.md` when artifacts exceed complexity thresholds (3+ unknowns, 5+ tasks, 4+ risk buckets, packet promotion).
@@ -124,16 +126,16 @@ For 5+ column tables, add a `> [!info] Reading this table` legend. For 3+ tables
 - Every factual claim must carry an inline tier label.
 
 ## Output bundle (minimum)
-- `<slug>/Dashboard.md`
-- `<slug>/Research/YYYY-MM-DD-objective-and-gates.md`
-- `<slug>/Research/YYYY-MM-DD-risk-breakdown.md`
-- `<slug>/Research/<Modality>/YYYY-MM-DD-decision-packet-v0.x.md`
-- `<slug>/Research/<Modality>/YYYY-MM-DD-day0-7-execution.md`
-- `<slug>/Learning/YYYY-MM-DD-<topic>.md`
-- `<slug>/Publishing/YYYY-MM-DD-daily-publishing-bundle.md`
-- `<slug>/Process/YYYY-MM-DD-skill-evolution-log.md`
-- `<slug>/Process/YYYY-MM-DD-research-improvement-log.md`
-- `<slug>/10-Hubs/**/*.md`
+- `<slug>/dashboard.md`
+- `<slug>/research/YYYY-MM-DD-objective-and-gates.md`
+- `<slug>/research/YYYY-MM-DD-risk-breakdown.md`
+- `<slug>/research/<modality>/YYYY-MM-DD-decision-packet-v0.x.md`
+- `<slug>/research/<modality>/YYYY-MM-DD-day0-7-execution.md`
+- `<slug>/learning/YYYY-MM-DD-<topic>.md`
+- `<slug>/publishing/YYYY-MM-DD-daily-publishing-bundle.md`
+- `<slug>/process/YYYY-MM-DD-skill-evolution-log.md`
+- `<slug>/process/YYYY-MM-DD-research-improvement-log.md`
+- `<slug>/hubs/**/*.md`
 - `<slug>/project-config.yaml`
 
-For single-modality projects, omit `<Modality>/` subfolders — files go directly in `Research/` and `Learning/`.
+For single-modality projects, omit `<modality>/` subfolders — files go directly in `research/` and `learning/`.

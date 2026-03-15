@@ -6,19 +6,19 @@ Obsidian's power comes from backlinks and graph view. Every note the skill produ
 
 ## Hub Notes
 
-Hub notes are small linking nodes that accumulate backlinks. They live under `10-Hubs/` and serve as the connective tissue of the vault.
+Hub notes are small linking nodes that accumulate backlinks. They live under `hubs/` and serve as the connective tissue of the vault.
 
 ### Hub categories
 
 | Category | Path | What gets a hub | Example |
 |----------|------|----------------|---------|
-| **Stations** | `10-Hubs/Stations/` | Each factory station or major workflow stage | `Station 1 - LISTEN.md` |
-| **Skills** | `10-Hubs/Skills/` | Each Claude Code skill (existing or planned) | `design-review.md`, `swarm.md` |
-| **Tools** | `10-Hubs/Tools/` | External tools, APIs, platforms referenced across multiple notes | `PRAW.md`, `App Store Connect API.md` |
-| **Communities** | `10-Hubs/Communities/` | Online communities, groups, forums, podcasts, channels | `r-Genealogy.md`, `Genealogy Discord.md` |
-| **People** | `10-Hubs/People/` | Key contacts, influencers, interviewees | `Connie Knox.md` |
-| **Competitors** | `10-Hubs/Competitors/` | Competitor products or companies | `CamScanner.md`, `Cleo AI.md` |
-| **Concepts** | `10-Hubs/Concepts/` | Recurring strategic concepts | `AI Factory.md`, `Foundry-Factory Framework.md` |
+| **stations** | `hubs/stations/` | Each factory station or major workflow stage | `station-1-listen.md` |
+| **skills** | `hubs/skills/` | Each Claude Code skill (existing or planned) | `design-review.md`, `swarm.md` |
+| **tools** | `hubs/tools/` | External tools, APIs, platforms referenced across multiple notes | `praw.md`, `app-store-connect-api.md` |
+| **communities** | `hubs/communities/` | Online communities, groups, forums, podcasts, channels | `r-genealogy.md`, `genealogy-discord.md` |
+| **people** | `hubs/people/` | Key contacts, influencers, interviewees | `connie-knox.md` |
+| **competitors** | `hubs/competitors/` | Competitor products or companies | `camscanner.md`, `cleo-ai.md` |
+| **concepts** | `hubs/concepts/` | Recurring strategic concepts | `ai-factory.md`, `foundry-factory-framework.md` |
 
 ### Hub note template
 
@@ -64,13 +64,13 @@ When a hub-worthy concept appears in body text, link it with a wikilink **on its
 **Good:**
 ```markdown
 ## Channel 1: Reddit
-Monitored via [[PRAW]] (free tier). Primary target is [[r-Genealogy]].
+Monitored via [[praw|PRAW]] (free tier). Primary target is [[r-genealogy|r/Genealogy]].
 Later in this section, PRAW's stream.submissions() function...
 ```
 
 **Bad (over-linking):**
 ```markdown
-Monitored via [[PRAW]] (free tier). [[PRAW]]'s stream feature... using [[PRAW]] we can...
+Monitored via [[praw|PRAW]] (free tier). [[praw|PRAW]]'s stream feature... using [[praw|PRAW]] we can...
 ```
 
 ### Rule 2: Link in table cells for key entities
@@ -78,10 +78,10 @@ Monitored via [[PRAW]] (free tier). [[PRAW]]'s stream feature... using [[PRAW]] 
 When tables reference tools, communities, stations, or other hub-worthy entities, link them in the table:
 
 ```markdown
-| `app-store-reviews` | [[Station 1 - LISTEN\|LISTEN]] | Fetch reviews via [[App Store Connect API]] |
+| `app-store-reviews` | [[station-1-listen\|LISTEN]] | Fetch reviews via [[app-store-connect-api\|App Store Connect API]] |
 ```
 
-Use the pipe alias syntax `[[Target\|Display Text]]` when the hub note name doesn't read naturally inline.
+Use the pipe alias syntax `[[target\|Display Text]]` when the hub note name doesn't read naturally inline.
 
 ### Rule 3: Link station flow in every document
 
@@ -91,9 +91,9 @@ Every document that is part of a multi-station workflow should include station f
 ## Cross-links
 
 ### Factory flow
-- **This station:** [[Station 1 - LISTEN]]
-- **Feeds into:** [[Station 2 - THINK]]
-- **Receives from:** [[Station 6 - MARKET]], [[Station 7 - LEARN]]
+- **This station:** [[station-1-listen|Station 1 - LISTEN]]
+- **Feeds into:** [[station-2-think|Station 2 - THINK]]
+- **Receives from:** [[station-6-market|Station 6 - MARKET]], [[station-7-learn|Station 7 - LEARN]]
 ```
 
 ### Rule 4: Link to parent and sibling documents
@@ -111,9 +111,9 @@ See also: [[2026-03-09-station-2-think-deep-dive]].
 
 Before writing a file to the vault, scan the content for these linkable categories:
 
-- [ ] **Station references** — Any mention of LISTEN, THINK, BUILD, TEST, SHIP, MARKET, LEARN, ORCHESTRATE → link to `[[Station N - NAME]]`
-- [ ] **Tool/API references** — Any mention of a tool, API, or platform (PRAW, Firebase, Sentry, Appfigures, etc.) → check if hub exists, create if referenced 2+ times, link to `[[Tool Name]]`
-- [ ] **Community references** — Any mention of a subreddit, Facebook group, Discord, podcast, YouTube channel → check if hub exists, create if referenced 2+ times, link to `[[Community Name]]`
+- [ ] **Station references** — Any mention of LISTEN, THINK, BUILD, TEST, SHIP, MARKET, LEARN, ORCHESTRATE → link to `[[station-n-name]]` (use alias for display: `[[station-1-listen|Station 1 - LISTEN]]`)
+- [ ] **Tool/API references** — Any mention of a tool, API, or platform (PRAW, Firebase, Sentry, Appfigures, etc.) → check if hub exists, create if referenced 2+ times, link to `[[tool-name]]` (use alias for display: `[[praw|PRAW]]`)
+- [ ] **Community references** — Any mention of a subreddit, Facebook group, Discord, podcast, YouTube channel → check if hub exists, create if referenced 2+ times, link to `[[community-name]]`
 - [ ] **Skill references** — Any mention of a Claude Code skill (`/swarm`, `design-review`, etc.) → link to skill hub if it exists
 - [ ] **Competitor references** — Any mention of a competitor product → link to competitor hub
 - [ ] **Cross-document references** — Any mention of another vault document by concept (not just in cross-links) → add inline wikilink
@@ -130,7 +130,12 @@ Before writing a file to the vault, scan the content for these linkable categori
 3. **Don't orphan notes** — Every note must link to at least one other note. If a note has zero outgoing wikilinks, it's missing connections.
 
 ### Hub naming conventions:
-- **Subreddits:** Use `r-SubredditName` (hyphen, not slash — slashes break filenames). Display as `r/SubredditName` using alias: `[[r-Genealogy|r/Genealogy]]`
-- **Facebook groups:** Use the group's display name: `Technology for Genealogy.md`
-- **Tools/APIs:** Use the common name: `PRAW.md`, `App Store Connect API.md`
-- **Stations:** Use `Station N - NAME.md` format: `Station 1 - LISTEN.md`
+
+All hub filenames must be **lowercase, no spaces, alphanumeric + hyphens only** (`[a-z0-9-]+.md`). Use wikilink aliases for human-readable display names.
+
+- **Subreddits:** `r-genealogy.md` — display via `[[r-genealogy|r/Genealogy]]`
+- **Facebook groups:** `technology-for-genealogy.md` — display via `[[technology-for-genealogy|Technology for Genealogy]]`
+- **Tools/APIs:** `praw.md`, `app-store-connect-api.md` — display via `[[praw|PRAW]]`
+- **Stations:** `station-1-listen.md` — display via `[[station-1-listen|Station 1 - LISTEN]]`
+- **People:** `connie-knox.md` — display via `[[connie-knox|Connie Knox]]`
+- **General rule:** Lowercase the name, replace spaces with hyphens, strip non-alphanumeric chars (except hyphens)

@@ -50,10 +50,10 @@ Skip enriched rendering when:
 
 All visual outputs are written to the Obsidian vault under `<slug>/` using the standard folder structure defined in `references/output/obsidian-organization.md`:
 
-- Learn cards: `<slug>/03-Learn-Cards/YYYY-MM-DD-<topic>.md`
-- Decision packets: `<slug>/04-Research/YYYY-MM-DD-decision-packet-v0.x.md`
-- Execution boards: `<slug>/05-Execution/YYYY-MM-DD-execution-board.md`
-- Risk breakdowns: `<slug>/02-Risks/YYYY-MM-DD-risk-breakdown.md`
+- Learn cards: `<slug>/learning/YYYY-MM-DD-<topic>.md`
+- Decision packets: `<slug>/research/YYYY-MM-DD-decision-packet-v0.x.md`
+- Execution boards: `<slug>/research/YYYY-MM-DD-execution-board.md`
+- Risk breakdowns: `<slug>/research/YYYY-MM-DD-risk-breakdown.md`
 
 The enriched markdown IS the artifact -- there is no separate visual layer. The same file renders as plain text in any markdown viewer and as rich visual content in Obsidian.
 
@@ -61,7 +61,7 @@ The enriched markdown IS the artifact -- there is no separate visual layer. The 
 
 1. Create artifact using the enriched template (frontmatter + Mermaid + callouts)
 2. File it in the appropriate Obsidian vault folder
-3. Dataview queries in `00-Index/current-cycle.md` automatically pick up the new artifact
+3. Dataview queries in `dashboard.md` automatically pick up the new artifact
 4. If Charts plugin is installed, KPI trend blocks render inline
 
 This keeps the Obsidian-first workflow with no external dependencies.
